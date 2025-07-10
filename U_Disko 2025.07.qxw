@@ -2348,7 +2348,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="101">
+     <Level LowLimit="0" HighLimit="255" Value="176">
       <Channel Fixture="4">0</Channel>
      </Level>
      <Playback>
@@ -2366,7 +2366,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="176">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="4">1</Channel>
      </Level>
      <Playback>
@@ -2384,7 +2384,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="27">
       <Channel Fixture="4">2</Channel>
      </Level>
      <Playback>
@@ -2636,7 +2636,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="102">
+     <Level LowLimit="0" HighLimit="255" Value="176">
       <Channel Fixture="0">6</Channel>
      </Level>
      <Playback>
@@ -2654,7 +2654,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="176">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="0">7</Channel>
      </Level>
      <Playback>
@@ -2672,7 +2672,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="27">
       <Channel Fixture="0">8</Channel>
      </Level>
      <Playback>

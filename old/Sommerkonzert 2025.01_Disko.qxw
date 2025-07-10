@@ -4,7 +4,7 @@
  <Creator>
   <Name>Q Light Controller Plus</Name>
   <Version>4.14.1-2</Version>
-  <Author>jw</Author>
+  <Author>JW</Author>
  </Creator>
  <Engine>
   <InputOutputMap>
@@ -889,7 +889,7 @@
    <FixtureVal ID="6">0,0,1,255,2,128,3,0</FixtureVal>
   </Function>
   <Function ID="33" Type="Chaser" Name=" Regenbogen (manuell)">
-   <Speed FadeIn="4508" FadeOut="4508" Duration="4508"/>
+   <Speed FadeIn="3108" FadeOut="3108" Duration="3108"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -989,7 +989,7 @@
    </Axis>
   </Function>
   <Function ID="39" Type="Chaser" Name=" Regenbogen (manuell) (einzeln)">
-   <Speed FadeIn="0" FadeOut="0" Duration="1127"/>
+   <Speed FadeIn="0" FadeOut="0" Duration="777"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -1093,7 +1093,7 @@
    <FixtureVal ID="3">2,0</FixtureVal>
   </Function>
   <Function ID="44" Type="Chaser" Name="vorne/hinten">
-   <Speed FadeIn="1127" FadeOut="1127" Duration="1127"/>
+   <Speed FadeIn="777" FadeOut="777" Duration="777"/>
    <Direction>Forward</Direction>
    <RunOrder>PingPong</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1212,7 +1212,7 @@
    <FixtureVal ID="6">0,157,1,0,2,255,3,0</FixtureVal>
   </Function>
   <Function ID="57" Type="Chaser" Name="vornehintenjuslian (auf takt)">
-   <Speed FadeIn="1127" FadeOut="1127" Duration="1127"/>
+   <Speed FadeIn="777" FadeOut="777" Duration="777"/>
    <Direction>Forward</Direction>
    <RunOrder>PingPong</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1293,7 +1293,7 @@
    <Step Number="1">28</Step>
   </Function>
   <Function ID="70" Type="Chaser" Name="vornehintenjuslian (auf takt) mies langsam">
-   <Speed FadeIn="2254" FadeOut="2254" Duration="2254"/>
+   <Speed FadeIn="1554" FadeOut="1554" Duration="1554"/>
    <Direction>Forward</Direction>
    <RunOrder>PingPong</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1314,7 +1314,7 @@
    <Step Number="1">56</Step>
   </Function>
   <Function ID="74" Type="Chaser" Name=" Regenbogen (manuell) (lahm)">
-   <Speed FadeIn="2254" FadeOut="2254" Duration="2254"/>
+   <Speed FadeIn="1554" FadeOut="1554" Duration="1554"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1339,7 +1339,7 @@
    <Step Number="1" FadeIn="0" Hold="0" FadeOut="0">75</Step>
   </Function>
   <Function ID="78" Type="Chaser" Name=" Regenbogen (manuell) (same)">
-   <Speed FadeIn="1127" FadeOut="1127" Duration="1127"/>
+   <Speed FadeIn="777" FadeOut="777" Duration="777"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1528,7 +1528,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="251">
+     <Level LowLimit="0" HighLimit="255" Value="203">
       <Channel Fixture="4">0</Channel>
      </Level>
      <Playback>
@@ -1546,7 +1546,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="1">
+     <Level LowLimit="0" HighLimit="255" Value="155">
       <Channel Fixture="4">1</Channel>
      </Level>
      <Playback>
@@ -1564,7 +1564,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="238">
+     <Level LowLimit="0" HighLimit="255" Value="228">
       <Channel Fixture="4">2</Channel>
      </Level>
      <Playback>
@@ -1816,7 +1816,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="251">
+     <Level LowLimit="0" HighLimit="255" Value="203">
       <Channel Fixture="0">6</Channel>
      </Level>
      <Playback>
@@ -1834,7 +1834,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="1">
+     <Level LowLimit="0" HighLimit="255" Value="156">
       <Channel Fixture="0">7</Channel>
      </Level>
      <Playback>
@@ -1852,7 +1852,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="238">
+     <Level LowLimit="0" HighLimit="255" Value="229">
       <Channel Fixture="0">8</Channel>
      </Level>
      <Playback>
@@ -2156,7 +2156,7 @@
     </Appearance>
     <Visibility>101</Visibility>
     <AbsoluteValue Minimum="0" Maximum="10000"/>
-    <Time>1127</Time>
+    <Time>777</Time>
     <Key>Return</Key>
     <MultKey>PgUp</MultKey>
     <DivKey>PgDown</DivKey>
