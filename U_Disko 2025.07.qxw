@@ -4,7 +4,7 @@
  <Creator>
   <Name>Q Light Controller Plus</Name>
   <Version>4.14.1-2</Version>
-  <Author>JW</Author>
+  <Author>jw</Author>
  </Creator>
  <Engine>
   <InputOutputMap>
@@ -1229,8 +1229,8 @@
    <Color Index="4">4278190080</Color>
    <ControlMode>RGB</ControlMode>
    <FixtureGroup>3</FixtureGroup>
-   <Property Name="blockSize" Value="1"/>
    <Property Name="orientation" Value="Interleaved"/>
+   <Property Name="blockSize" Value="1"/>
   </Function>
   <Function ID="38" Type="EFX" Name="Oben/Unten">
    <Fixture>
@@ -1283,7 +1283,7 @@
    </Axis>
   </Function>
   <Function ID="39" Type="Chaser" Name=" Regenbogen (manuell) (einzeln)">
-   <Speed FadeIn="430" FadeOut="430" Duration="860"/>
+   <Speed FadeIn="419" FadeOut="419" Duration="839"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -1506,7 +1506,7 @@
    <FixtureVal ID="6">0,157,1,0,2,255</FixtureVal>
   </Function>
   <Function ID="57" Type="Chaser" Name="vornehintenjuslian (auf takt)">
-   <Speed FadeIn="860" FadeOut="860" Duration="860"/>
+   <Speed FadeIn="839" FadeOut="839" Duration="839"/>
    <Direction>Forward</Direction>
    <RunOrder>PingPong</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1587,7 +1587,7 @@
    <Step Number="1">28</Step>
   </Function>
   <Function ID="70" Type="Chaser" Name="vornehintenjuslian (auf takt) mies langsam">
-   <Speed FadeIn="1720" FadeOut="1720" Duration="1720"/>
+   <Speed FadeIn="1678" FadeOut="1678" Duration="1678"/>
    <Direction>Forward</Direction>
    <RunOrder>PingPong</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1608,7 +1608,7 @@
    <Step Number="1">56</Step>
   </Function>
   <Function ID="74" Type="Chaser" Name=" Regenbogen (manuell) (lahm)">
-   <Speed FadeIn="0" FadeOut="1720" Duration="1720"/>
+   <Speed FadeIn="0" FadeOut="1678" Duration="1678"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1672,7 +1672,7 @@
    <FixtureGroup>4294967295</FixtureGroup>
   </Function>
   <Function ID="81" Type="Chaser" Name=" Regenbogen (manuell)">
-   <Speed FadeIn="860" FadeOut="860" Duration="860"/>
+   <Speed FadeIn="839" FadeOut="839" Duration="839"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1789,7 +1789,7 @@
    <FixtureVal ID="6">0,255,1,255,2,0</FixtureVal>
   </Function>
   <Function ID="92" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (ein)">
-   <Speed FadeIn="430" FadeOut="430" Duration="860"/>
+   <Speed FadeIn="419" FadeOut="419" Duration="839"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -1817,7 +1817,7 @@
    <FixtureVal ID="6">0,127,1,255,2,0</FixtureVal>
   </Function>
   <Function ID="94" Type="Chaser" Name=" Regenbogen (manuell) (ein)">
-   <Speed FadeIn="860" FadeOut="860" Duration="860"/>
+   <Speed FadeIn="839" FadeOut="839" Duration="839"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -2113,7 +2113,7 @@
    <FixtureVal ID="6"/>
   </Function>
   <Function ID="134" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (ein) (Drum)">
-   <Speed FadeIn="155" FadeOut="155" Duration="310"/>
+   <Speed FadeIn="196" FadeOut="196" Duration="392"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -2131,7 +2131,7 @@
    <Step Number="11" FadeIn="0" Hold="834" FadeOut="0">124</Step>
   </Function>
   <Function ID="135" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (ein) (keine Drums)">
-   <Speed FadeIn="430" FadeOut="430" Duration="860"/>
+   <Speed FadeIn="419" FadeOut="419" Duration="839"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -2149,7 +2149,7 @@
    <Step Number="11" FadeIn="0" Hold="834" FadeOut="0">113</Step>
   </Function>
   <Function ID="136" Type="Chaser" Name=" Regenbogen (manuell) (ein) (keine Drums)">
-   <Speed FadeIn="860" FadeOut="860" Duration="860"/>
+   <Speed FadeIn="839" FadeOut="839" Duration="839"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -2182,6 +2182,51 @@
     <BackgroundImage>None</BackgroundImage>
     <Font>Default</Font>
    </Appearance>
+   <Frame Caption="" ID="26">
+    <Appearance>
+     <FrameStyle>Sunken</FrameStyle>
+     <ForegroundColor>Default</ForegroundColor>
+     <BackgroundColor>Default</BackgroundColor>
+     <BackgroundImage>None</BackgroundImage>
+     <Font>Default</Font>
+    </Appearance>
+    <WindowState Visible="True" X="495" Y="245" Width="215" Height="175"/>
+    <AllowChildren>True</AllowChildren>
+    <AllowResize>True</AllowResize>
+    <ShowHeader>False</ShowHeader>
+    <ShowEnableButton>False</ShowEnableButton>
+    <Collapsed>False</Collapsed>
+    <Disabled>False</Disabled>
+    <Slider Caption="Master Drum" ID="58" WidgetStyle="Slider" InvertedAppearance="false">
+     <WindowState Visible="True" X="150" Y="0" Width="65" Height="175"/>
+     <Appearance>
+      <FrameStyle>Sunken</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Submaster</SliderMode>
+     <Level LowLimit="0" HighLimit="255" Value="255"/>
+     <Playback>
+      <Function>4294967295</Function>
+     </Playback>
+    </Slider>
+    <Button Caption="Drum" ID="62" Icon="">
+     <WindowState Visible="True" X="0" Y="140" Width="150" Height="30"/>
+     <Appearance>
+      <FrameStyle>None</FrameStyle>
+      <ForegroundColor>Default</ForegroundColor>
+      <BackgroundColor>Default</BackgroundColor>
+      <BackgroundImage>None</BackgroundImage>
+      <Font>Default</Font>
+     </Appearance>
+     <Function ID="134"/>
+     <Action>Toggle</Action>
+     <Key>,</Key>
+     <Intensity Adjust="False">100</Intensity>
+    </Button>
+   </Frame>
    <SoloFrame Caption="" ID="17">
     <Appearance>
      <FrameStyle>Sunken</FrameStyle>
@@ -2387,7 +2432,7 @@
       <Font>Default</Font>
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Submaster</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="255"/>
+     <Level LowLimit="0" HighLimit="255" Value="199"/>
      <Playback>
       <Function>4294967295</Function>
      </Playback>
@@ -2559,7 +2604,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="255">
       <Channel Fixture="4">0</Channel>
      </Level>
      <Playback>
@@ -2577,7 +2622,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="230">
       <Channel Fixture="4">1</Channel>
      </Level>
      <Playback>
@@ -2629,7 +2674,7 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="0" Y="370" Width="680" Height="335"/>
+    <WindowState Visible="True" X="0" Y="415" Width="680" Height="335"/>
     <AllowChildren>False</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>False</ShowHeader>
@@ -2723,7 +2768,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="127">
       <Channel Fixture="0">0</Channel>
      </Level>
      <Playback>
@@ -2741,7 +2786,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="2">
       <Channel Fixture="0">1</Channel>
      </Level>
      <Playback>
@@ -2759,7 +2804,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="225">
       <Channel Fixture="0">2</Channel>
      </Level>
      <Playback>
@@ -2777,7 +2822,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="244">
       <Channel Fixture="0">3</Channel>
      </Level>
      <Playback>
@@ -2831,7 +2876,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="255">
       <Channel Fixture="0">6</Channel>
      </Level>
      <Playback>
@@ -2849,7 +2894,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="230">
       <Channel Fixture="0">7</Channel>
      </Level>
      <Playback>
@@ -3190,7 +3235,7 @@
      </Playback>
     </Slider>
     <Button Caption="Man(einzeln)(nondrum)" ID="95" Icon="">
-     <WindowState Visible="True" X="495" Y="185" Width="145" Height="35"/>
+     <WindowState Visible="True" X="495" Y="215" Width="145" Height="35"/>
      <Appearance>
       <FrameStyle>None</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
@@ -3204,7 +3249,7 @@
      <Intensity Adjust="False">100</Intensity>
     </Button>
     <Button Caption="Man(rgb)(nondrum)" ID="96" Icon="">
-     <WindowState Visible="True" X="495" Y="215" Width="145" Height="35"/>
+     <WindowState Visible="True" X="495" Y="250" Width="145" Height="35"/>
      <Appearance>
       <FrameStyle>None</FrameStyle>
       <ForegroundColor>Default</ForegroundColor>
@@ -3230,7 +3275,7 @@
     <Visibility>101</Visibility>
     <AbsoluteValue Minimum="0" Maximum="10000"/>
     <ResetFactorOnDialChange>True</ResetFactorOnDialChange>
-    <Time>860</Time>
+    <Time>839</Time>
     <Key>Return</Key>
     <MultKey>F</MultKey>
     <DivKey>G</DivKey>
@@ -3411,7 +3456,7 @@
     </Button>
    </SoloFrame>
    <Slider Caption="Brightness" ID="19" WidgetStyle="Slider" InvertedAppearance="false">
-    <WindowState Visible="True" X="700" Y="255" Width="80" Height="210"/>
+    <WindowState Visible="True" X="685" Y="425" Width="80" Height="210"/>
     <Appearance>
      <FrameStyle>Sunken</FrameStyle>
      <ForegroundColor>Default</ForegroundColor>
@@ -3536,7 +3581,7 @@
      <BackgroundImage>None</BackgroundImage>
      <Font>Default</Font>
     </Appearance>
-    <WindowState Visible="True" X="525" Y="155" Width="145" Height="135"/>
+    <WindowState Visible="True" X="495" Y="165" Width="100" Height="130"/>
     <AllowChildren>True</AllowChildren>
     <AllowResize>True</AllowResize>
     <ShowHeader>False</ShowHeader>
@@ -3608,7 +3653,7 @@
     <Visibility>101</Visibility>
     <AbsoluteValue Minimum="0" Maximum="10000"/>
     <ResetFactorOnDialChange>True</ResetFactorOnDialChange>
-    <Time>310</Time>
+    <Time>392</Time>
     <Key>Space</Key>
     <MultKey>F</MultKey>
     <DivKey>G</DivKey>
@@ -3616,50 +3661,6 @@
     <ApplyKey>-</ApplyKey>
     <Function FadeIn="5" FadeOut="5" Duration="6">134</Function>
    </SpeedDial>
-   <Frame Caption="" ID="26">
-    <Appearance>
-     <FrameStyle>Sunken</FrameStyle>
-     <ForegroundColor>Default</ForegroundColor>
-     <BackgroundColor>Default</BackgroundColor>
-     <BackgroundImage>None</BackgroundImage>
-     <Font>Default</Font>
-    </Appearance>
-    <WindowState Visible="True" X="495" Y="225" Width="215" Height="175"/>
-    <AllowChildren>True</AllowChildren>
-    <AllowResize>True</AllowResize>
-    <ShowHeader>False</ShowHeader>
-    <ShowEnableButton>False</ShowEnableButton>
-    <Collapsed>False</Collapsed>
-    <Disabled>False</Disabled>
-    <Slider Caption="Master Drum" ID="58" WidgetStyle="Slider" InvertedAppearance="false">
-     <WindowState Visible="True" X="150" Y="0" Width="65" Height="175"/>
-     <Appearance>
-      <FrameStyle>Sunken</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
-      <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
-     </Appearance>
-     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Submaster</SliderMode>
-     <Level LowLimit="0" HighLimit="255" Value="255"/>
-     <Playback>
-      <Function>4294967295</Function>
-     </Playback>
-    </Slider>
-    <Button Caption="Drum" ID="62" Icon="">
-     <WindowState Visible="True" X="0" Y="125" Width="150" Height="30"/>
-     <Appearance>
-      <FrameStyle>None</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
-      <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
-     </Appearance>
-     <Function ID="134"/>
-     <Action>Toggle</Action>
-     <Intensity Adjust="False">100</Intensity>
-    </Button>
-   </Frame>
   </Frame>
   <Properties>
    <Size Width="2300" Height="1080"/>
