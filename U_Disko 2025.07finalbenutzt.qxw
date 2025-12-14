@@ -3,14 +3,14 @@
 <Workspace xmlns="http://www.qlcplus.org/Workspace" CurrentWindow="VirtualConsole">
  <Creator>
   <Name>Q Light Controller Plus</Name>
-  <Version>4.14.1-2</Version>
-  <Author>jw</Author>
+  <Version>4.14.3</Version>
+  <Author>jakob</Author>
  </Creator>
  <Engine>
   <InputOutputMap>
    <BeatGenerator BeatType="Disabled" BPM="0"/>
    <Universe Name="Universe 1" ID="0">
-    <Output Plugin="DMX USB" UID="FT232R USB UART (S/N: B003X46H)" Line="0"/>
+    <Output Plugin="DMX USB" UID="None" Line="0"/>
    </Universe>
    <Universe Name="Universe 2" ID="1"/>
    <Universe Name="Universe 3" ID="2"/>
@@ -1293,7 +1293,7 @@
    </Axis>
   </Function>
   <Function ID="39" Type="Chaser" Name=" Regenbogen (manuell) (einzeln)">
-   <Speed FadeIn="625" FadeOut="625" Duration="1251"/>
+   <Speed FadeIn="435" FadeOut="435" Duration="871"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -1516,7 +1516,7 @@
    <FixtureVal ID="6">0,157,1,0,2,255</FixtureVal>
   </Function>
   <Function ID="57" Type="Chaser" Name="vornehintenjuslian (auf takt)">
-   <Speed FadeIn="1251" FadeOut="1251" Duration="1251"/>
+   <Speed FadeIn="871" FadeOut="871" Duration="871"/>
    <Direction>Forward</Direction>
    <RunOrder>PingPong</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1597,7 +1597,7 @@
    <Step Number="1">28</Step>
   </Function>
   <Function ID="70" Type="Chaser" Name="vornehintenjuslian (auf takt) mies langsam">
-   <Speed FadeIn="2502" FadeOut="2502" Duration="2502"/>
+   <Speed FadeIn="1742" FadeOut="1742" Duration="1742"/>
    <Direction>Forward</Direction>
    <RunOrder>PingPong</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1618,7 +1618,7 @@
    <Step Number="1">56</Step>
   </Function>
   <Function ID="74" Type="Chaser" Name=" Regenbogen (manuell) (lahm)">
-   <Speed FadeIn="0" FadeOut="2502" Duration="2502"/>
+   <Speed FadeIn="0" FadeOut="1742" Duration="1742"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1682,7 +1682,7 @@
    <FixtureGroup>4294967295</FixtureGroup>
   </Function>
   <Function ID="81" Type="Chaser" Name=" Regenbogen (manuell)">
-   <Speed FadeIn="1251" FadeOut="1251" Duration="1251"/>
+   <Speed FadeIn="871" FadeOut="871" Duration="871"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1799,7 +1799,7 @@
    <FixtureVal ID="6">0,255,1,255,2,0</FixtureVal>
   </Function>
   <Function ID="92" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (ein)">
-   <Speed FadeIn="625" FadeOut="625" Duration="1251"/>
+   <Speed FadeIn="435" FadeOut="435" Duration="871"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -1827,7 +1827,7 @@
    <FixtureVal ID="6">0,127,1,255,2,0</FixtureVal>
   </Function>
   <Function ID="94" Type="Chaser" Name=" Regenbogen (manuell) (ein)">
-   <Speed FadeIn="1251" FadeOut="1251" Duration="1251"/>
+   <Speed FadeIn="871" FadeOut="871" Duration="871"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -2233,7 +2233,7 @@
    <FixtureVal ID="6"/>
   </Function>
   <Function ID="134" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (ein) (Drum)">
-   <Speed FadeIn="524" FadeOut="524" Duration="1048"/>
+   <Speed FadeIn="145" FadeOut="145" Duration="290"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -2251,7 +2251,7 @@
    <Step Number="11" FadeIn="0" Hold="834" FadeOut="0">124</Step>
   </Function>
   <Function ID="135" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (ein) (keine Drums)">
-   <Speed FadeIn="625" FadeOut="625" Duration="1251"/>
+   <Speed FadeIn="435" FadeOut="435" Duration="871"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -2269,7 +2269,7 @@
    <Step Number="11" FadeIn="0" Hold="834" FadeOut="0">113</Step>
   </Function>
   <Function ID="136" Type="Chaser" Name=" Regenbogen (manuell) (ein) (keine Drums)">
-   <Speed FadeIn="1251" FadeOut="1251" Duration="1251"/>
+   <Speed FadeIn="871" FadeOut="871" Duration="871"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -2287,7 +2287,7 @@
    <Step Number="11" FadeIn="0" Hold="834" FadeOut="0">113</Step>
   </Function>
   <Function ID="137" Type="Chaser" Name=" Regenbogen (manuell) (2)">
-   <Speed FadeIn="1251" FadeOut="1251" Duration="1251"/>
+   <Speed FadeIn="871" FadeOut="871" Duration="871"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -2305,7 +2305,7 @@
    <Step Number="11" FadeIn="839" Hold="0" FadeOut="839">106</Step>
   </Function>
   <Function ID="138" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (2)">
-   <Speed FadeIn="625" FadeOut="625" Duration="1251"/>
+   <Speed FadeIn="435" FadeOut="435" Duration="871"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -2395,6 +2395,7 @@
      </Appearance>
      <Function ID="58"/>
      <Action Override="0" ForceLTP="1">Flash</Action>
+     <Key>Q</Key>
      <Intensity Adjust="False">100</Intensity>
      <Input Universe="0" Channel="177"/>
     </Button>
@@ -2407,8 +2408,9 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <Function ID="89"/>
+     <Function ID="15"/>
      <Action Override="1" ForceLTP="1">Flash</Action>
+     <Key>W</Key>
      <Intensity Adjust="False">100</Intensity>
      <Input Universe="0" Channel="179"/>
     </Button>
@@ -2421,8 +2423,9 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <Function ID="91"/>
+     <Function ID="16"/>
      <Action Override="1" ForceLTP="1">Flash</Action>
+     <Key>E</Key>
      <Intensity Adjust="False">100</Intensity>
      <Input Universe="0" Channel="182"/>
     </Button>
@@ -2451,6 +2454,7 @@
      </Appearance>
      <Function ID="86"/>
      <Action Override="1" ForceLTP="1">Flash</Action>
+     <Key>R</Key>
      <Intensity Adjust="False">100</Intensity>
      <Input Universe="0" Channel="186"/>
     </Button>
@@ -2479,6 +2483,7 @@
      </Appearance>
      <Function ID="85"/>
      <Action Override="1" ForceLTP="1">Flash</Action>
+     <Key>T</Key>
      <Intensity Adjust="False">100</Intensity>
      <Input Universe="0" Channel="191"/>
     </Button>
@@ -2507,6 +2512,7 @@
      </Appearance>
      <Function ID="52"/>
      <Action Override="1" ForceLTP="1">Flash</Action>
+     <Key>Z</Key>
      <Intensity Adjust="False">100</Intensity>
      <Input Universe="0" Channel="196"/>
     </Button>
@@ -2521,6 +2527,7 @@
      </Appearance>
      <Function ID="56"/>
      <Action Override="1" ForceLTP="1">Flash</Action>
+     <Key>U</Key>
      <Intensity Adjust="False">100</Intensity>
      <Input Universe="0" Channel="198"/>
     </Button>
@@ -2535,6 +2542,7 @@
      </Appearance>
      <Function ID="88"/>
      <Action Override="1" ForceLTP="1">Flash</Action>
+     <Key>I</Key>
      <Intensity Adjust="False">100</Intensity>
     </Button>
     <Button Caption="Pink" ID="16" Icon="">
@@ -2728,7 +2736,6 @@
      </Appearance>
      <Function ID="81"/>
      <Action>Toggle</Action>
-     <Key>ß</Key>
      <Intensity Adjust="False">100</Intensity>
     </Button>
     <Button Caption="Manuell(einz)(komp)" ID="74" Icon="">
@@ -2742,6 +2749,7 @@
      </Appearance>
      <Function ID="39"/>
      <Action>Toggle</Action>
+     <Key>ß</Key>
      <Intensity Adjust="False">100</Intensity>
     </Button>
     <Button Caption="Blackout" ID="75" Icon="">
@@ -3083,7 +3091,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="255">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="4">0</Channel>
      </Level>
      <Playback>
@@ -3247,7 +3255,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="200">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="0">0</Channel>
      </Level>
      <Playback>
@@ -3265,7 +3273,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="89">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="0">1</Channel>
      </Level>
      <Playback>
@@ -3283,7 +3291,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="87">
+     <Level LowLimit="0" HighLimit="255" Value="128">
       <Channel Fixture="0">2</Channel>
      </Level>
      <Playback>
@@ -3301,7 +3309,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="28">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="0">3</Channel>
      </Level>
      <Playback>
@@ -3355,7 +3363,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="255">
+     <Level LowLimit="0" HighLimit="255" Value="0">
       <Channel Fixture="0">6</Channel>
      </Level>
      <Playback>
@@ -3501,7 +3509,7 @@
     <Visibility>101</Visibility>
     <AbsoluteValue Minimum="0" Maximum="10000"/>
     <ResetFactorOnDialChange>True</ResetFactorOnDialChange>
-    <Time>1251</Time>
+    <Time>871</Time>
     <Key>Return</Key>
     <MultKey>F</MultKey>
     <DivKey>G</DivKey>
@@ -3881,7 +3889,7 @@
     <Visibility>101</Visibility>
     <AbsoluteValue Minimum="0" Maximum="10000"/>
     <ResetFactorOnDialChange>True</ResetFactorOnDialChange>
-    <Time>1048</Time>
+    <Time>290</Time>
     <Key>Space</Key>
     <MultKey>F</MultKey>
     <DivKey>G</DivKey>
@@ -3932,7 +3940,7 @@
   </Frame>
   <Properties>
    <Size Width="2300" Height="1080"/>
-   <GrandMaster ChannelMode="Intensity" ValueMode="Reduce" SliderMode="Normal"/>
+   <GrandMaster Visible="1" ChannelMode="Intensity" ValueMode="Reduce" SliderMode="Normal"/>
   </Properties>
  </VirtualConsole>
  <SimpleDesk>
