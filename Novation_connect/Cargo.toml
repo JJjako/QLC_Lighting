@@ -1,0 +1,8 @@
+[package]
+name = "Novation_connect"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+dict = "0.1.5"
+launchy = "0.4.1"
