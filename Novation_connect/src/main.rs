@@ -8,7 +8,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let (mut canvas, poller) = Canvas::guess_polling()?;
     let mut scene:u32  = 0;
     let mut normal_canvas = vec![
-        Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,
+        Color::RED,Color::new(1.0,0.5,0.0),Color::new(1.0, 1.0, 0.0),Color::new(0.0,1.0,0.0),Color::CYAN,Color::new(0.0,0.5,1.0),Color::BLUE,Color::WHITE,
         Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,
         Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,
         Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,Color::BLACK,
@@ -29,10 +29,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 let pad = Pad { x: x as i32, y: y as i32 };
                 if y == 0 || x == 8{
                     println!("Szene {}", x); 
-                    scene = x;
+                    //scene = x;
                 }
                 else {
-                    send_dmx(1, (x+y*8+scene*100), 0.75);
+                    send_dmx(1, (x+y*8+scene*100), 1.0);
                 
                 }
 

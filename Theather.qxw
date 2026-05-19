@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Workspace>
+<Workspace xmlns="http://www.qlcplus.org/Workspace" CurrentWindow="InputOutputManager">
+ <Creator>
+  <Name>Q Light Controller Plus</Name>
+  <Version>4.14.4 GIT</Version>
+  <Author>jw</Author>
+ </Creator>
+ <Engine>
+  <InputOutputMap>
+   <BeatGenerator BeatType="Disabled" BPM="0"/>
+   <Universe Name="Universe 1" ID="0"/>
+   <Universe Name="Universe 2" ID="1"/>
+   <Universe Name="Universe 3" ID="2"/>
+   <Universe Name="Universe 4" ID="3"/>
+  </InputOutputMap>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>1 Channel</Mode>
+   <ID>0</ID>
+   <Name>Rechts 1</Name>
+   <Universe>0</Universe>
+   <Address>0</Address>
+   <Channels>1</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>1 Channel</Mode>
+   <ID>1</ID>
+   <Name>Rechts 2</Name>
+   <Universe>0</Universe>
+   <Address>1</Address>
+   <Channels>1</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>1 Channel</Mode>
+   <ID>2</ID>
+   <Name>Mitte</Name>
+   <Universe>0</Universe>
+   <Address>2</Address>
+   <Channels>1</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>1 Channel</Mode>
+   <ID>3</ID>
+   <Name>Links 1</Name>
+   <Universe>0</Universe>
+   <Address>3</Address>
+   <Channels>1</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>1 Channel</Mode>
+   <ID>4</ID>
+   <Name>Links 2</Name>
+   <Universe>0</Universe>
+   <Address>4</Address>
+   <Channels>1</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>1 Channel</Mode>
+   <ID>5</ID>
+   <Name>Vor d. Buehne</Name>
+   <Universe>0</Universe>
+   <Address>5</Address>
+   <Channels>1</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>1 Channel</Mode>
+   <ID>6</ID>
+   <Name>Verfolger</Name>
+   <Universe>0</Universe>
+   <Address>6</Address>
+   <Channels>1</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>RGBWW</Manufacturer>
+   <Model>Starville</Model>
+   <Mode>4ch</Mode>
+   <ID>7</ID>
+   <Name>Hinten Rechts</Name>
+   <Universe>0</Universe>
+   <Address>7</Address>
+   <Channels>4</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>RGBWW</Manufacturer>
+   <Model>Starville</Model>
+   <Mode>4ch</Mode>
+   <ID>8</ID>
+   <Name>Hinten mitterechts </Name>
+   <Universe>0</Universe>
+   <Address>11</Address>
+   <Channels>4</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>RGBWW</Manufacturer>
+   <Model>Starville</Model>
+   <Mode>4ch</Mode>
+   <ID>9</ID>
+   <Name>Hinten mittelinks</Name>
+   <Universe>0</Universe>
+   <Address>15</Address>
+   <Channels>4</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>RGBWW</Manufacturer>
+   <Model>Starville</Model>
+   <Mode>4ch</Mode>
+   <ID>10</ID>
+   <Name>Hinten mitterechts</Name>
+   <Universe>0</Universe>
+   <Address>19</Address>
+   <Channels>4</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>RGBWW</Manufacturer>
+   <Model>Starville</Model>
+   <Mode>4ch</Mode>
+   <ID>12</ID>
+   <Name>Vorne Mitte</Name>
+   <Universe>0</Universe>
+   <Address>27</Address>
+   <Channels>4</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>RGBWW</Manufacturer>
+   <Model>Starville</Model>
+   <Mode>4ch</Mode>
+   <ID>13</ID>
+   <Name>Vorne Rechts</Name>
+   <Universe>0</Universe>
+   <Address>31</Address>
+   <Channels>4</Channels>
+  </Fixture>
+ </Engine>
+ <VirtualConsole>
+  <Frame Caption="">
+   <Appearance>
+    <FrameStyle>None</FrameStyle>
+    <ForegroundColor>Default</ForegroundColor>
+    <BackgroundColor>Default</BackgroundColor>
+    <BackgroundImage>None</BackgroundImage>
+    <Font>Default</Font>
+   </Appearance>
+  </Frame>
+  <Properties>
+   <Size Width="1920" Height="1080"/>
+   <GrandMaster Visible="1" ChannelMode="Intensity" ValueMode="Reduce" SliderMode="Normal"/>
+  </Properties>
+ </VirtualConsole>
+ <SimpleDesk>
+  <Engine/>
+ </SimpleDesk>
+</Workspace>
