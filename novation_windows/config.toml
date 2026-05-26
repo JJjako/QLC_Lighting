@@ -1,0 +1,187 @@
+# Launchpad Mini MK3 → QLC+ OSC Bridge Configuration
+
+[osc]
+# QLC+ OSC input address (enable it in QLC+ under Inputs/Outputs)
+host = "127.0.0.1"
+port = 7700
+
+[midi]
+device_name = "MIDIIN2 (LPMiniMK3 MIDI)"
+device_out_name = "LPMiniMK3 MIDI"
+
+# ─────────────────────────────────────────────
+# PAGES
+# Each page fills the 8×8 grid of the Launchpad.
+# Buttons are identified by their MIDI note number.
+#
+# Launchpad Mini MK3 note layout (top-left = 81, bottom-left = 11):
+#
+#   [Page keys: top row notes 91–98]
+#
+#   81 82 83 84 85 86 87 88
+#   71 72 73 74 75 76 77 78
+#   61 62 63 64 65 66 67 68
+#   51 52 53 54 55 56 57 58
+#   41 42 43 44 45 46 47 48
+#   31 32 33 34 35 36 37 38
+#   21 22 23 24 25 26 27 28
+#   11 12 13 14 15 16 17 18
+#
+# RGB colours are 0–127 (Launchpad velocity-based palette).
+# Common palette values:
+#   0   = off
+#   5   = dim red       21  = dim green      45  = blue
+#   72  = white         13  = yellow         57  = cyan
+#   96  = orange        53  = purple         79  = pink
+# ─────────────────────────────────────────────
+
+# The top-row scene buttons (CC 91–98) cycle through pages.
+# Page index 0 is active on startup.
+
+# ── PAGE 0: Disco / Effects ───────────────────
+[[pages]]
+name = "Disco"
+# Colour to light this page's selector button (top row) — bright green
+selector_color = 21
+
+  [[pages.buttons]]
+  note = 81
+  label = "Strobe Fast"
+  color = 72        # white
+  osc_address = "/qlc/function/1"   # QLC+ Function ID 1
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 82
+  label = "Strobe Slow"
+  color = 72
+  osc_address = "/qlc/function/2"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 83
+  label = "Color Chase"
+  color = 13        # yellow
+  osc_address = "/qlc/function/3"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 84
+  label = "Rainbow"
+  color = 53        # purple
+  osc_address = "/qlc/function/4"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 71
+  label = "Blackout"
+  color = 5         # dim red
+  osc_address = "/qlc/function/99"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 72
+  label = "Full ON"
+  color = 72
+  osc_address = "/qlc/function/100"
+  osc_value = 1.0
+
+# ── PAGE 1: Static Scenes ─────────────────────
+[[pages]]
+name = "Scenes"
+selector_color = 45   # blue
+
+  [[pages.buttons]]
+  note = 81
+  label = "Scene: Warm"
+  color = 96        # orange
+  osc_address = "/qlc/function/10"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 82
+  label = "Scene: Cool"
+  color = 57        # cyan
+  osc_address = "/qlc/function/11"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 83
+  label = "Scene: Red"
+  color = 5
+  osc_address = "/qlc/function/12"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 84
+  label = "Scene: Blue"
+  color = 45
+  osc_address = "/qlc/function/13"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 85
+  label = "Scene: Green"
+  color = 21
+  osc_address = "/qlc/function/14"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 86
+  label = "Scene: Purple"
+  color = 53
+  osc_address = "/qlc/function/15"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 87
+  label = "Scene: White"
+  color = 72
+  osc_address = "/qlc/function/16"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 88
+  label = "Scene: Off"
+  color = 0
+  osc_address = "/qlc/function/17"
+  osc_value = 1.0
+
+# ── PAGE 2: Moving Heads X/Y ──────────────────
+# 8×8 grid = 64 positions mapped to Pan/Tilt
+# Buttons send pan/tilt as two OSC floats (0.0–1.0)
+# We define a special type = "xy" page here.
+[[pages]]
+name = "MovingHeads"
+selector_color = 79   # pink
+xy_mode = true        # entire grid becomes a pan/tilt pad
+
+  # In xy_mode: rows = tilt (top=0.0, bottom=1.0),
+  #             cols = pan  (left=0.0, right=1.0)
+  [pages.xy_config]
+  pan_address  = "/qlc/channel/1"   # DMX channel mapped in QLC+
+  tilt_address = "/qlc/channel/2"
+  color_inactive = 45               # blue grid
+  color_active   = 72               # white selected cell
+
+# ── PAGE 3: Dimmer Sliders (columns = fixtures) ──
+[[pages]]
+name = "Dimmers"
+selector_color = 96   # orange
+fader_mode = true     # columns act as 8-step faders per fixture
+
+  [pages.fader_config]
+  # Each column controls one fixture dimmer channel
+  # OSC addresses for the 8 fixture dimmer channels
+  addresses = [
+    "/qlc/channel/10",
+    "/qlc/channel/11",
+    "/qlc/channel/12",
+    "/qlc/channel/13",
+    "/qlc/channel/14",
+    "/qlc/channel/15",
+    "/qlc/channel/16",
+    "/qlc/channel/17",
+  ]
+  color_on  = 13    # yellow lit step
+  color_off = 0     # unlit step

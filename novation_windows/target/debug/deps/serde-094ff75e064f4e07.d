@@ -1,0 +1,14 @@
+C:\Users\jw\Documents\GitHub\QLC_Lighting\novation_windows\target\debug\deps\serde-094ff75e064f4e07.d: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\Users\jw\Documents\GitHub\QLC_Lighting\novation_windows\target\debug\build\serde-58ff6ab5bf28e202\out/private.rs
+
+C:\Users\jw\Documents\GitHub\QLC_Lighting\novation_windows\target\debug\deps\libserde-094ff75e064f4e07.rlib: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\Users\jw\Documents\GitHub\QLC_Lighting\novation_windows\target\debug\build\serde-58ff6ab5bf28e202\out/private.rs
+
+C:\Users\jw\Documents\GitHub\QLC_Lighting\novation_windows\target\debug\deps\libserde-094ff75e064f4e07.rmeta: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs C:\Users\jw\Documents\GitHub\QLC_Lighting\novation_windows\target\debug\build\serde-58ff6ab5bf28e202\out/private.rs
+
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs:
+C:\Users\jw\Documents\GitHub\QLC_Lighting\novation_windows\target\debug\build\serde-58ff6ab5bf28e202\out/private.rs:
+
+# env-dep:OUT_DIR=C:\\Users\\jw\\Documents\\GitHub\\QLC_Lighting\\novation_windows\\target\\debug\\build\\serde-58ff6ab5bf28e202\\out

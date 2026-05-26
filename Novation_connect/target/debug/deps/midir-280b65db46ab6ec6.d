@@ -1,0 +1,11 @@
+C:\Users\jw\Documents\GitHub\QLC_Lighting\Novation_connect\target\debug\deps\midir-280b65db46ab6ec6.d: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\os\mod.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\errors.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\common.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\backend\mod.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\backend\winmm\mod.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\backend\winmm\handler.rs
+
+C:\Users\jw\Documents\GitHub\QLC_Lighting\Novation_connect\target\debug\deps\libmidir-280b65db46ab6ec6.rmeta: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\os\mod.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\errors.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\common.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\backend\mod.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\backend\winmm\mod.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\backend\winmm\handler.rs
+
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\lib.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\os\mod.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\errors.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\common.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\backend\mod.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\backend\winmm\mod.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\midir-0.9.1\src\backend\winmm\handler.rs:
