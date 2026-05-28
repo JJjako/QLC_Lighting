@@ -3258,7 +3258,7 @@
      </Appearance>
      <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
      <Reset/>
-     <Level LowLimit="0" HighLimit="255" Value="0">
+     <Level LowLimit="0" HighLimit="255" Value="127">
       <Channel Fixture="0">0</Channel>
      </Level>
      <Playback>
@@ -4173,13 +4173,31 @@
      <Axis ID="Y" LowLimit="0" HighLimit="1" Reverse="False"/>
     </Fixture>
     <Window hMin="30" hMax="202" vMin="0" vMax="256"/>
-    <Pan Position="103">
+    <Pan Position="54">
      <Input Universe="0" Channel="4774" UpperValue="0" MonitorValue="0"/>
     </Pan>
-    <Tilt Position="72">
+    <Tilt Position="255">
      <Input Universe="0" Channel="8253" UpperValue="0" MonitorValue="0"/>
     </Tilt>
    </XYPad>
+   <CueList Caption="Cue list" ID="28">
+    <WindowState Visible="True" X="1525" Y="230" Width="300" Height="220"/>
+    <Appearance>
+     <FrameStyle>Sunken</FrameStyle>
+     <ForegroundColor>Default</ForegroundColor>
+     <BackgroundColor>Default</BackgroundColor>
+     <BackgroundImage>None</BackgroundImage>
+     <Font>Default</Font>
+    </Appearance>
+    <Chaser>51</Chaser>
+    <NextPrevBehavior>0</NextPrevBehavior>
+    <Next/>
+    <Previous/>
+    <Playback>
+     <Input Universe="0" Channel="35636"/>
+    </Playback>
+    <Stop/>
+   </CueList>
   </Frame>
   <Properties>
    <Size Width="2300" Height="1080"/>

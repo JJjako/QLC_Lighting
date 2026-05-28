@@ -1,0 +1,10 @@
+C:\Users\jw\Documents\GitHub\QLC_Lighting\novation_windows\target\debug\deps\windows_collections-e755e189ac722257.d: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\bindings.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\iterable.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\map_view.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\vector_view.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\../readme.md
+
+C:\Users\jw\Documents\GitHub\QLC_Lighting\novation_windows\target\debug\deps\libwindows_collections-e755e189ac722257.rmeta: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\bindings.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\iterable.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\map_view.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\vector_view.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\../readme.md
+
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\lib.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\bindings.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\iterable.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\map_view.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\vector_view.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\windows-collections-0.3.2\src\../readme.md:
