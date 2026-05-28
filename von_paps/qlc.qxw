@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Workspace>
+<Workspace xmlns="http://www.qlcplus.org/Workspace" CurrentWindow="VirtualConsole">
+ <Creator>
+  <Name>Q Light Controller Plus</Name>
+  <Version>4.14.4 GIT</Version>
+  <Author>jw</Author>
+ </Creator>
+
+ <!-- ═══════════════════════════════════════════════════════════════════════
+      FIXTURES
+      ═══════════════════════════════════════════════════════════════════════ -->
+ <Engine>
+  <InputOutputMap>
+   <Universe Name="Universe 1" ID="0">
+    <Output Plugin="DMX USB" UID="your-dmx-uid" Line="0"/>
+    <Input Plugin="OSC" UID="OSC" Line="0"/>
+   </Universe>
+  </InputOutputMap>
+
+  <!-- Moving Head 1 – monitor, DMX 1–14 -->
+  <Fixture>
+   <Manufacturer>Unsere</Manufacturer>
+   <Model>Stage Wash 7x10W LED Moving Head</Model>
+   <Mode>14-channel</Mode>
+   <Universe>0</Universe>
+   <Name>MH1 monitor</Name>
+   <ID>0</ID>
+   <Address>0</Address>
+   <Channels>14</Channels>
+  </Fixture>
+
+  <!-- Moving Head 2 – komp, DMX 15–28 -->
+  <Fixture>
+   <Manufacturer>Unsere</Manufacturer>
+   <Model>Stage Wash 7x10W LED Moving Head</Model>
+   <Mode>14-channel</Mode>
+   <Universe>0</Universe>
+   <Name>MH2 komp</Name>
+   <ID>1</ID>
+   <Address>14</Address>
+   <Channels>14</Channels>
+  </Fixture>
+
+  <!-- Moving Head 3 – drummer, DMX 29–42 -->
+  <Fixture>
+   <Manufacturer>Unsere</Manufacturer>
+   <Model>Stage Wash 7x10W LED Moving Head</Model>
+   <Mode>14-channel</Mode>
+   <Universe>0</Universe>
+   <Name>MH3 drummer</Name>
+   <ID>2</ID>
+   <Address>28</Address>
+   <Channels>14</Channels>
+  </Fixture>
+
+  <!-- Moving Head 4 – komplementär, DMX 43–56 -->
+  <Fixture>
+   <Manufacturer>Unsere</Manufacturer>
+   <Model>Stage Wash 7x10W LED Moving Head</Model>
+   <Mode>14-channel</Mode>
+   <Universe>0</Universe>
+   <Name>MH4 komplementär</Name>
+   <ID>3</ID>
+   <Address>42</Address>
+   <Channels>14</Channels>
+  </Fixture>
+
+  <!-- SePar RGBW – moni, DMX 57–60 -->
+  <Fixture>
+   <Manufacturer>Eigenes</Manufacturer>
+   <Model>SePar Quad LED RGBW</Model>
+   <Mode>4-channel</Mode>
+   <Universe>0</Universe>
+   <Name>RGBW moni</Name>
+   <ID>4</ID>
+   <Address>56</Address>
+   <Channels>4</Channels>
+  </Fixture>
+
+  <!-- SePar RGBW – main, DMX 61–64 -->
+  <Fixture>
+   <Manufacturer>Eigenes</Manufacturer>
+   <Model>SePar Quad LED RGBW</Model>
+   <Mode>4-channel</Mode>
+   <Universe>0</Universe>
+   <Name>RGBW main</Name>
+   <ID>5</ID>
+   <Address>60</Address>
+   <Channels>4</Channels>
+  </Fixture>
+
+  <!-- SePar RGBW – komple, DMX 65–68 -->
+  <Fixture>
+   <Manufacturer>Eigenes</Manufacturer>
+   <Model>SePar Quad LED RGBW</Model>
+   <Mode>4-channel</Mode>
+   <Universe>0</Universe>
+   <Name>RGBW komple</Name>
+   <ID>6</ID>
+   <Address>64</Address>
+   <Channels>4</Channels>
+  </Fixture>
+
+  <!-- Generic 6ch dimmer (halogens), DMX 69–74 -->
+  <Fixture>
+   <Manufacturer>Generic</Manufacturer>
+   <Model>Generic</Model>
+   <Mode>6 Channel</Mode>
+   <Universe>0</Universe>
+   <Name>Halogens dimmer</Name>
+   <ID>7</ID>
+   <Address>68</Address>
+   <Channels>6</Channels>
+  </Fixture>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FUNCTIONS
+       ID map:
+         20-22  = RGBW individual full-on scenes
+         23     = All RGBW full-on
+         30-37  = RGBW colour scenes (Red/Green/Blue/White/Purple/Yellow/Cyan/Off)
+         40-44  = Moving head colour scenes
+         50-56  = Flash scenes (same content as colour scenes, used for flash page)
+         60-61  = Strobe chasers
+         70-74  = MH position presets
+         80-85  = MH EFX functions
+         99     = Blackout
+         100    = Full ON
+       ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ─── RGBW individual masters ──────────────────────────────────────── -->
+  <Function Type="Scene" ID="20" Name="RGBW moni full-on">
+   <FixtureVal ID="4">255,255,255,255</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="21" Name="RGBW main full-on">
+   <FixtureVal ID="5">255,255,255,255</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="22" Name="RGBW komple full-on">
+   <FixtureVal ID="6">255,255,255,255</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="23" Name="All RGBW full-on">
+   <FixtureVal ID="4">255,255,255,255</FixtureVal>
+   <FixtureVal ID="5">255,255,255,255</FixtureVal>
+   <FixtureVal ID="6">255,255,255,255</FixtureVal>
+  </Function>
+
+  <!-- ─── RGBW colour scenes ────────────────────────────────────────────── -->
+  <!-- ch0=R ch1=G ch2=B ch3=W for SePar RGBW 4-ch -->
+
+  <Function Type="Scene" ID="30" Name="All RGBW Red">
+   <FixtureVal ID="4">255,0,0,0</FixtureVal>
+   <FixtureVal ID="5">255,0,0,0</FixtureVal>
+   <FixtureVal ID="6">255,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="31" Name="All RGBW Green">
+   <FixtureVal ID="4">0,255,0,0</FixtureVal>
+   <FixtureVal ID="5">0,255,0,0</FixtureVal>
+   <FixtureVal ID="6">0,255,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="32" Name="All RGBW Blue">
+   <FixtureVal ID="4">0,0,255,0</FixtureVal>
+   <FixtureVal ID="5">0,0,255,0</FixtureVal>
+   <FixtureVal ID="6">0,0,255,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="33" Name="All RGBW White">
+   <FixtureVal ID="4">0,0,0,255</FixtureVal>
+   <FixtureVal ID="5">0,0,0,255</FixtureVal>
+   <FixtureVal ID="6">0,0,0,255</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="34" Name="All RGBW Purple">
+   <FixtureVal ID="4">180,0,255,0</FixtureVal>
+   <FixtureVal ID="5">180,0,255,0</FixtureVal>
+   <FixtureVal ID="6">180,0,255,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="35" Name="All RGBW Yellow">
+   <FixtureVal ID="4">255,200,0,0</FixtureVal>
+   <FixtureVal ID="5">255,200,0,0</FixtureVal>
+   <FixtureVal ID="6">255,200,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="36" Name="All RGBW Cyan">
+   <FixtureVal ID="4">0,255,255,0</FixtureVal>
+   <FixtureVal ID="5">0,255,255,0</FixtureVal>
+   <FixtureVal ID="6">0,255,255,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="37" Name="All RGBW Off">
+   <FixtureVal ID="4">0,0,0,0</FixtureVal>
+   <FixtureVal ID="5">0,0,0,0</FixtureVal>
+   <FixtureVal ID="6">0,0,0,0</FixtureVal>
+  </Function>
+
+  <!-- ─── Moving Head colour scenes ────────────────────────────────────── -->
+  <!-- MH 14-ch: ch5=Dimmer ch7=R ch8=G ch9=B ch10=W -->
+  <!-- Values: Pan(0),PanF(1),Tilt(2),TiltF(3),Speed(4),Dim(5),Strobe(6),R(7),G(8),B(9),W(10),Macro(11),Prog(12),Reset(13) -->
+
+  <Function Type="Scene" ID="40" Name="MH Red">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,255,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,255,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,255,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,255,0,0,0,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="41" Name="MH Green">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,0,255,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,0,255,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,0,255,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,0,255,0,0,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="42" Name="MH Blue">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,0,0,255,0,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,0,0,255,0,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,0,0,255,0,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,0,0,255,0,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="43" Name="MH White">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="44" Name="MH Purple">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,180,0,255,0,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,180,0,255,0,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,180,0,255,0,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,180,0,255,0,0,0,0</FixtureVal>
+  </Function>
+
+  <!-- ─── Flash scenes (same content, separate IDs so OSC on/off is clean) -->
+
+  <Function Type="Scene" ID="50" Name="Flash RGBW moni">
+   <FixtureVal ID="4">255,255,255,255</FixtureVal>
+  </Function>
+  <Function Type="Scene" ID="51" Name="Flash RGBW main">
+   <FixtureVal ID="5">255,255,255,255</FixtureVal>
+  </Function>
+  <Function Type="Scene" ID="52" Name="Flash RGBW komple">
+   <FixtureVal ID="6">255,255,255,255</FixtureVal>
+  </Function>
+  <Function Type="Scene" ID="53" Name="Flash All RGB">
+   <FixtureVal ID="4">255,255,255,255</FixtureVal>
+   <FixtureVal ID="5">255,255,255,255</FixtureVal>
+   <FixtureVal ID="6">255,255,255,255</FixtureVal>
+  </Function>
+  <Function Type="Scene" ID="54" Name="Flash MH Red">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,255,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,255,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,255,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,255,0,0,0,0,0,0</FixtureVal>
+  </Function>
+  <Function Type="Scene" ID="55" Name="Flash MH White">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+  </Function>
+  <Function Type="Scene" ID="56" Name="Flash MH Blue">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,0,0,255,0,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,0,0,255,0,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,0,0,255,0,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,0,0,255,0,0,0,0</FixtureVal>
+  </Function>
+
+  <!-- ─── Strobe chasers ────────────────────────────────────────────────── -->
+  <Function Type="Chaser" ID="60" Name="Strobe Fast">
+   <Speed FadeIn="0" FadeOut="0" Duration="80"/>
+   <Direction>Forward</Direction>
+   <RunOrder>Loop</RunOrder>
+   <Step Number="0" FadeIn="0" FadeOut="0" Duration="80">53</Step>
+   <Step Number="1" FadeIn="0" FadeOut="0" Duration="80">37</Step>
+  </Function>
+
+  <Function Type="Chaser" ID="61" Name="Strobe Slow">
+   <Speed FadeIn="0" FadeOut="0" Duration="250"/>
+   <Direction>Forward</Direction>
+   <RunOrder>Loop</RunOrder>
+   <Step Number="0" FadeIn="0" FadeOut="0" Duration="250">53</Step>
+   <Step Number="1" FadeIn="0" FadeOut="0" Duration="250">37</Step>
+  </Function>
+
+  <!-- ─── Moving Head position presets ─────────────────────────────────── -->
+  <!-- Pan 128=center, Tilt 128=center, Dimmer 255, White 255 -->
+
+  <Function Type="Scene" ID="70" Name="MH Center">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="71" Name="MH Left">
+   <FixtureVal ID="0">30,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="1">30,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="2">30,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="3">30,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="72" Name="MH Right">
+   <FixtureVal ID="0">225,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="1">225,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="2">225,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="3">225,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="73" Name="MH Up">
+   <FixtureVal ID="0">128,0,30,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,30,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,30,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,30,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="74" Name="MH Down">
+   <FixtureVal ID="0">128,0,225,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,225,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,225,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,225,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+  </Function>
+
+  <!-- ─── EFX Moving Head patterns ─────────────────────────────────────── -->
+  <Function Type="EFX" ID="80" Name="EFX Circle">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <Direction>Forward</Direction>
+   <RunOrder>Loop</RunOrder>
+   <Algorithm>Circle</Algorithm>
+   <Width>100</Width>
+   <Height>100</Height>
+   <Rotation>0</Rotation>
+   <StartOffset>0</StartOffset>
+   <IsRelative>0</IsRelative>
+   <Axis ID="0" Invert="0">
+    <Channel>0</Channel>  <!-- Pan -->
+   </Axis>
+   <Axis ID="1" Invert="0">
+    <Channel>2</Channel>  <!-- Tilt -->
+   </Axis>
+   <Fixture Direction="Forward" StartOffset="0">0</Fixture>
+   <Fixture Direction="Forward" StartOffset="90">1</Fixture>
+   <Fixture Direction="Forward" StartOffset="180">2</Fixture>
+   <Fixture Direction="Forward" StartOffset="270">3</Fixture>
+  </Function>
+
+  <Function Type="EFX" ID="81" Name="EFX Figure-8">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <Direction>Forward</Direction>
+   <RunOrder>Loop</RunOrder>
+   <Algorithm>Lissajous</Algorithm>
+   <Width>100</Width>
+   <Height>100</Height>
+   <Rotation>0</Rotation>
+   <StartOffset>0</StartOffset>
+   <IsRelative>0</IsRelative>
+   <Axis ID="0" Invert="0"><Channel>0</Channel></Axis>
+   <Axis ID="1" Invert="0"><Channel>2</Channel></Axis>
+   <Fixture Direction="Forward" StartOffset="0">0</Fixture>
+   <Fixture Direction="Forward" StartOffset="90">1</Fixture>
+   <Fixture Direction="Forward" StartOffset="180">2</Fixture>
+   <Fixture Direction="Forward" StartOffset="270">3</Fixture>
+  </Function>
+
+  <Function Type="EFX" ID="82" Name="EFX Random">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <Direction>Forward</Direction>
+   <RunOrder>Loop</RunOrder>
+   <Algorithm>Diamond</Algorithm>
+   <Width>80</Width>
+   <Height>80</Height>
+   <Rotation>0</Rotation>
+   <StartOffset>0</StartOffset>
+   <IsRelative>0</IsRelative>
+   <Axis ID="0" Invert="0"><Channel>0</Channel></Axis>
+   <Axis ID="1" Invert="0"><Channel>2</Channel></Axis>
+   <Fixture Direction="Forward" StartOffset="0">0</Fixture>
+   <Fixture Direction="Forward" StartOffset="90">1</Fixture>
+   <Fixture Direction="Forward" StartOffset="180">2</Fixture>
+   <Fixture Direction="Forward" StartOffset="270">3</Fixture>
+  </Function>
+
+  <Function Type="EFX" ID="83" Name="EFX Fan">
+   <Speed FadeIn="0" FadeOut="0" Duration="0"/>
+   <Direction>Forward</Direction>
+   <RunOrder>Loop</RunOrder>
+   <Algorithm>Line</Algorithm>
+   <Width>100</Width>
+   <Height>40</Height>
+   <Rotation>0</Rotation>
+   <StartOffset>0</StartOffset>
+   <IsRelative>0</IsRelative>
+   <Axis ID="0" Invert="0"><Channel>0</Channel></Axis>
+   <Axis ID="1" Invert="0"><Channel>2</Channel></Axis>
+   <Fixture Direction="Forward" StartOffset="0">0</Fixture>
+   <Fixture Direction="Forward" StartOffset="64">1</Fixture>
+   <Fixture Direction="Forward" StartOffset="128">2</Fixture>
+   <Fixture Direction="Forward" StartOffset="192">3</Fixture>
+  </Function>
+
+  <!-- Stop all MH: park at center, dimmer 0 -->
+  <Function Type="Scene" ID="85" Name="Stop all MH">
+   <FixtureVal ID="0">128,0,128,0,0,0,0,0,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,0,0,0,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,0,0,0,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,0,0,0,0,0,0,0,0,0</FixtureVal>
+  </Function>
+
+  <!-- ─── Global utility ────────────────────────────────────────────────── -->
+  <Function Type="Scene" ID="99" Name="BLACKOUT">
+   <FixtureVal ID="0">128,0,128,0,0,0,0,0,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,0,0,0,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,0,0,0,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,0,0,0,0,0,0,0,0,0</FixtureVal>
+   <FixtureVal ID="4">0,0,0,0</FixtureVal>
+   <FixtureVal ID="5">0,0,0,0</FixtureVal>
+   <FixtureVal ID="6">0,0,0,0</FixtureVal>
+   <FixtureVal ID="7">0,0,0,0,0,0</FixtureVal>
+  </Function>
+
+  <Function Type="Scene" ID="100" Name="FULL ON">
+   <FixtureVal ID="0">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="1">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="2">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="3">128,0,128,0,0,255,0,0,0,0,255,0,0,0</FixtureVal>
+   <FixtureVal ID="4">0,0,0,255</FixtureVal>
+   <FixtureVal ID="5">0,0,0,255</FixtureVal>
+   <FixtureVal ID="6">0,0,0,255</FixtureVal>
+   <FixtureVal ID="7">255,255,255,255,255,255</FixtureVal>
+  </Function>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       OSC INPUT PLUGIN CONFIG
+       Port 7700 — all /qlc/function/<id> messages start/stop functions.
+       QLC+ handles this natively when OSC input is enabled.
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <InputOutputMap>
+   <Universe Name="OSC" ID="1">
+    <Input Plugin="OSC" UID="OSC" Line="0" FeedbackEnabled="0"/>
+   </Universe>
+  </InputOutputMap>
+
+ </Engine>
+
+ <!-- ═══════════════════════════════════════════════════════════════════════
+      VIRTUAL CONSOLE  (minimal — actual control is via Launchpad bridge)
+      ═══════════════════════════════════════════════════════════════════════ -->
+ <VirtualConsole>
+  <Frame>
+   <Appearance>
+    <FrameStyle>None</FrameStyle>
+    <ForegroundColor>Default</ForegroundColor>
+    <BackgroundColor>Default</BackgroundColor>
+    <BackgroundImage>None</BackgroundImage>
+    <Font>Default</Font>
+   </Appearance>
+
+   <!-- Simple blackout button on VC for safety -->
+   <Button Caption="BLACKOUT" ID="1" Icon="">
+    <WindowState Visible="True" X="10" Y="10" Width="120" Height="60"/>
+    <Appearance>
+     <FrameStyle>Sunken</FrameStyle>
+     <ForegroundColor>#ff0000</ForegroundColor>
+     <BackgroundColor>#300000</BackgroundColor>
+     <Font>Default</Font>
+    </Appearance>
+    <Function ID="99"/>
+    <Action>Toggle</Action>
+   </Button>
+
+   <!-- Full ON button -->
+   <Button Caption="FULL ON" ID="2" Icon="">
+    <WindowState Visible="True" X="140" Y="10" Width="120" Height="60"/>
+    <Appearance>
+     <FrameStyle>Sunken</FrameStyle>
+     <ForegroundColor>#ffffff</ForegroundColor>
+     <BackgroundColor>#202020</BackgroundColor>
+     <Font>Default</Font>
+    </Appearance>
+    <Function ID="100"/>
+    <Action>Toggle</Action>
+   </Button>
+
+  </Frame>
+ </VirtualConsole>
+
+</Workspace>

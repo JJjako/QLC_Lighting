@@ -1,0 +1,522 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Launchpad Mini MK3 → QLC+ OSC Bridge  —  config.toml
+#
+# Fixture universe layout (from your workspace):
+#   Fixture 0  → Moving Head 1  (monitor)      DMX  1–14   (universe 0, addr 0)
+#   Fixture 1  → Moving Head 2  (komp)         DMX 15–28   (universe 0, addr 14)
+#   Fixture 2  → Moving Head 3  (drummer)      DMX 29–42   (universe 0, addr 28)
+#   Fixture 3  → Moving Head 4  (komplementär) DMX 43–56   (universe 0, addr 42)
+#   Fixture 4  → SePar RGBW    (moni)          DMX 57–60   (universe 0, addr 56)
+#   Fixture 5  → SePar RGBW    (main)          DMX 61–64   (universe 0, addr 60)
+#   Fixture 6  → SePar RGBW    (komple)        DMX 65–68   (universe 0, addr 64)
+#   Fixture 7  → Generic 6ch dimmer (halogens) DMX 69–74   (universe 0, addr 68)
+#
+# OSC address scheme used throughout:
+#   /qlc/function/<id>       → start/stop a QLC+ Function by ID
+#   /qlc/channel/<universe>/<address>   → set a raw DMX channel (0-based)
+#
+# Moving Head 14-ch layout (per fixture):
+#   ch 0 = Pan      ch 1 = Pan Fine    ch 2 = Tilt     ch 3 = Tilt Fine
+#   ch 4 = Speed    ch 5 = Dimmer      ch 6 = Strobe    ch 7 = Red
+#   ch 8 = Green    ch 9 = Blue       ch 10 = White    ch 11 = Color Macro
+#   ch 12 = Programs ch 13 = Reset
+#
+# SePar RGBW 4-ch layout:
+#   ch 0 = Red   ch 1 = Green   ch 2 = Blue   ch 3 = White
+#
+# Generic 6ch dimmer:
+#   ch 0–5 = Dimmer channels (halogens 1–6)
+#
+# Palette colour reference (Launchpad MK3):
+#   0=off  5=dimRed  13=yellow  21=dimGreen  45=blue
+#   53=purple  57=cyan  72=white  79=pink  96=orange
+# ─────────────────────────────────────────────────────────────────────────────
+
+[osc]
+host = "127.0.0.1"
+port = 7700
+
+[midi]
+device_name     = "MIDIIN2 (LPMiniMK3 MIDI)"
+device_out_name = "LPMiniMK3 MIDI"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE 0 [CC 91] — RGB ON/OFF
+# Toggle each SePar RGBW fixture independently + colour scenes.
+# Grid layout:
+#   Row 7 (top): [81]=RGBW moni ON/OFF  [82]=RGBW main  [83]=RGBW komple
+#   Row 6:       [71]=Red all  [72]=Green  [73]=Blue  [74]=White  [75]=Off all
+#   Row 5:       [61]=Warm     [62]=Cool   [63]=Party  [64]=Blackout
+# ─────────────────────────────────────────────────────────────────────────────
+[[pages]]
+name           = "RGB"
+selector_color = 57     # cyan
+rgb_mode       = true
+
+  # ── individual fixture masters ───────────────────────────────────────────
+  [[pages.buttons]]
+  note        = 81
+  label       = "RGBW moni master"
+  osc_address = "/qlc/function/20"   # Scene: RGBW moni full-on
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 57    # cyan
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 82
+  label       = "RGBW main master"
+  osc_address = "/qlc/function/21"   # Scene: RGBW main full-on
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 57
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 83
+  label       = "RGBW komple master"
+  osc_address = "/qlc/function/22"   # Scene: RGBW komple full-on
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 57
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 84
+  label       = "All RGBW ON"
+  osc_address = "/qlc/function/23"   # Scene: all RGBW full-on
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 72    # white
+  color_off = 0
+
+  # ── colour scene toggles ─────────────────────────────────────────────────
+  [[pages.buttons]]
+  note        = 71
+  label       = "Red all RGBW"
+  osc_address = "/qlc/function/30"   # Scene: red
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 5     # red
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 72
+  label       = "Green all RGBW"
+  osc_address = "/qlc/function/31"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 21    # green
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 73
+  label       = "Blue all RGBW"
+  osc_address = "/qlc/function/32"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 45    # blue
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 74
+  label       = "White all RGBW"
+  osc_address = "/qlc/function/33"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 72    # white
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 75
+  label       = "Purple all RGBW"
+  osc_address = "/qlc/function/34"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 53    # purple
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 76
+  label       = "Yellow all RGBW"
+  osc_address = "/qlc/function/35"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 13    # yellow
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 77
+  label       = "Cyan all RGBW"
+  osc_address = "/qlc/function/36"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 57    # cyan
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 78
+  label       = "Off all RGBW"
+  osc_address = "/qlc/function/37"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 0
+  color_off = 0
+
+  # ── moving head colour scenes ────────────────────────────────────────────
+  [[pages.buttons]]
+  note        = 61
+  label       = "MH Red"
+  osc_address = "/qlc/function/40"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 5
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 62
+  label       = "MH Green"
+  osc_address = "/qlc/function/41"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 21
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 63
+  label       = "MH Blue"
+  osc_address = "/qlc/function/42"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 45
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 64
+  label       = "MH White"
+  osc_address = "/qlc/function/43"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 72
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 65
+  label       = "MH Purple"
+  osc_address = "/qlc/function/44"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 53
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 11
+  label       = "BLACKOUT"
+  osc_address = "/qlc/function/99"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 5
+  color_off = 0
+
+  [[pages.buttons]]
+  note        = 18
+  label       = "FULL ON"
+  osc_address = "/qlc/function/100"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 72
+  color_off = 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE 1 [CC 92] — FLASH
+# Hold to flash — button goes full white while pressed, off on release.
+# ─────────────────────────────────────────────────────────────────────────────
+[[pages]]
+name           = "Flash"
+selector_color = 96     # orange
+flash_mode     = true
+
+  [[pages.buttons]]
+  note          = 81
+  label         = "Flash RGBW moni"
+  osc_address   = "/qlc/function/50"   # Scene: RGBW moni full-on
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 57
+  color_off = 0
+
+  [[pages.buttons]]
+  note          = 82
+  label         = "Flash RGBW main"
+  osc_address   = "/qlc/function/51"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 57
+  color_off = 0
+
+  [[pages.buttons]]
+  note          = 83
+  label         = "Flash RGBW komple"
+  osc_address   = "/qlc/function/52"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 57
+  color_off = 0
+
+  [[pages.buttons]]
+  note          = 84
+  label         = "Flash All RGB"
+  osc_address   = "/qlc/function/53"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 72
+  color_off = 0
+
+  [[pages.buttons]]
+  note          = 71
+  label         = "Flash MH Red"
+  osc_address   = "/qlc/function/54"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 5
+  color_off = 0
+
+  [[pages.buttons]]
+  note          = 72
+  label         = "Flash MH White"
+  osc_address   = "/qlc/function/55"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 72
+  color_off = 0
+
+  [[pages.buttons]]
+  note          = 73
+  label         = "Flash MH Blue"
+  osc_address   = "/qlc/function/56"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 45
+  color_off = 0
+
+  [[pages.buttons]]
+  note          = 61
+  label         = "Strobe Fast"
+  osc_address   = "/qlc/function/60"   # Chaser: strobe fast
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 72
+  color_off = 0
+
+  [[pages.buttons]]
+  note          = 62
+  label         = "Strobe Slow"
+  osc_address   = "/qlc/function/61"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 45
+  color_off = 0
+
+  [[pages.buttons]]
+  note          = 11
+  label         = "BLACKOUT"
+  osc_address   = "/qlc/function/99"
+  osc_value     = 1.0
+  osc_value_off = 0.0
+  color_on  = 5
+  color_off = 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE 2 [CC 93] — MOVE (trigger Moving Head scenes/EFX)
+# ─────────────────────────────────────────────────────────────────────────────
+[[pages]]
+name           = "Move"
+selector_color = 79     # pink
+move_mode      = true
+
+  # Row 7: individual pan/tilt presets (fire QLC+ scenes with fixed pan/tilt)
+  [[pages.buttons]]
+  note        = 81
+  label       = "MH Center"
+  osc_address = "/qlc/function/70"
+  osc_value   = 1.0
+  color_on    = 72
+  color_off   = 0
+
+  [[pages.buttons]]
+  note        = 82
+  label       = "MH Left"
+  osc_address = "/qlc/function/71"
+  osc_value   = 1.0
+  color_on    = 45
+  color_off   = 0
+
+  [[pages.buttons]]
+  note        = 83
+  label       = "MH Right"
+  osc_address = "/qlc/function/72"
+  osc_value   = 1.0
+  color_on    = 45
+  color_off   = 0
+
+  [[pages.buttons]]
+  note        = 84
+  label       = "MH Up"
+  osc_address = "/qlc/function/73"
+  osc_value   = 1.0
+  color_on    = 21
+  color_off   = 0
+
+  [[pages.buttons]]
+  note        = 85
+  label       = "MH Down"
+  osc_address = "/qlc/function/74"
+  osc_value   = 1.0
+  color_on    = 21
+  color_off   = 0
+
+  # Row 6: EFX patterns
+  [[pages.buttons]]
+  note        = 71
+  label       = "EFX Circle"
+  osc_address = "/qlc/function/80"    # EFX: circle all heads
+  osc_value   = 1.0
+  color_on    = 57
+  color_off   = 0
+
+  [[pages.buttons]]
+  note        = 72
+  label       = "EFX Figure-8"
+  osc_address = "/qlc/function/81"
+  osc_value   = 1.0
+  color_on    = 57
+  color_off   = 0
+
+  [[pages.buttons]]
+  note        = 73
+  label       = "EFX Random"
+  osc_address = "/qlc/function/82"
+  osc_value   = 1.0
+  color_on    = 53
+  color_off   = 0
+
+  [[pages.buttons]]
+  note        = 74
+  label       = "EFX Fan"
+  osc_address = "/qlc/function/83"
+  osc_value   = 1.0
+  color_on    = 96
+  color_off   = 0
+
+  # Row 5: stop all movement
+  [[pages.buttons]]
+  note        = 61
+  label       = "Stop all MH"
+  osc_address = "/qlc/function/85"
+  osc_value   = 1.0
+  color_on    = 5
+  color_off   = 0
+
+  [[pages.buttons]]
+  note        = 11
+  label       = "BLACKOUT"
+  osc_address = "/qlc/function/99"
+  osc_value   = 1.0
+  color_on    = 5
+  color_off   = 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE 3 [CC 94] — BEAT SYNC
+# Background thread fires colour changes on every beat.
+# Right column: [59]=tap tempo  [49]=next palette  [39]=prev palette
+# Grid: static visual (bottom row lit as ready indicator).
+# ─────────────────────────────────────────────────────────────────────────────
+[[pages]]
+name           = "Beat"
+selector_color = 13     # yellow
+beat_mode      = true
+
+  [pages.beat_config]
+  # OSC addresses to cycle through — one per beat step.
+  # These should point to QLC+ scenes that set a specific colour on the RGBWs.
+  rgb_addresses = [
+    "/qlc/function/30",   # Red
+    "/qlc/function/31",   # Green
+    "/qlc/function/32",   # Blue
+    "/qlc/function/34",   # Purple
+    "/qlc/function/36",   # Cyan
+    "/qlc/function/35",   # Yellow
+    "/qlc/function/33",   # White
+    "/qlc/function/37",   # Off
+  ]
+  default_bpm = 120.0
+
+  # Palette entries are QLC+ palette colour indices (0-127) used for
+  # the Launchpad LED visualisation of each beat step.
+  palettes = [
+    # Palette 0: Rainbow chase
+    [5, 21, 45, 53, 57, 13, 72, 0],
+    # Palette 1: Red/Blue strobe
+    [5, 0, 45, 0, 5, 0, 45, 0],
+    # Palette 2: White flash
+    [72, 0, 72, 0, 72, 0, 72, 0],
+    # Palette 3: Warm
+    [96, 13, 5, 13, 96, 13, 5, 0],
+  ]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE 4 [CC 95] — XY PAN/TILT
+# Tap a grid cell to set pan+tilt for all 4 moving heads simultaneously.
+# Right column:
+#   [89] = toggle Coarse (green) / Fine (yellow) mode
+#   [79] = fine step +1  (blue when fine mode active)
+#   [69] = fine step -1
+# ─────────────────────────────────────────────────────────────────────────────
+[[pages]]
+name           = "XY"
+selector_color = 79     # pink
+xy_mode        = true
+
+  [pages.xy_config]
+  # These OSC addresses control a QLC+ Collection that sends to all 4 heads.
+  # Map them to a virtual console XY pad that drives all heads at once,
+  # OR use per-head addresses if you need individual control.
+  pan_address    = "/qlc/channel/0/0"    # MH1 Pan (universe 0, DMX addr 0)
+  tilt_address   = "/qlc/channel/0/2"    # MH1 Tilt
+  color_inactive = 45   # blue
+  color_active   = 72   # white
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PAGE 5 [CC 96] — FADER (Dimmers)
+# Columns 0-3 = Halogens (orange LEDs)   Columns 4-7 = RGBWs (cyan LEDs)
+#
+#  Col 0 = Halogen 1   Col 1 = Halogen 2   Col 2 = Halogen 3   Col 3 = Halogen 4
+#  Col 4 = RGBW moni   Col 5 = RGBW main   Col 6 = RGBW komple Col 7 = MH dimmer
+# ─────────────────────────────────────────────────────────────────────────────
+[[pages]]
+name           = "Fader"
+selector_color = 96     # orange
+fader_mode     = true
+
+  [pages.fader_config]
+  addresses = [
+    "/qlc/channel/0/68",   # Halogen 1  (Generic dimmer ch0, DMX 69)
+    "/qlc/channel/0/69",   # Halogen 2  (Generic dimmer ch1, DMX 70)
+    "/qlc/channel/0/70",   # Halogen 3  (Generic dimmer ch2, DMX 71)
+    "/qlc/channel/0/71",   # Halogen 4  (Generic dimmer ch3, DMX 72)
+    "/qlc/channel/0/61",   # RGBW moni  (SePar ch0=Red as master, DMX 57)
+    "/qlc/channel/0/65",   # RGBW main  (DMX 61)
+    "/qlc/channel/0/69",   # RGBW komple(DMX 65) ← adjust if needed
+    "/qlc/channel/0/61",   # MH dimmer  (MH1 ch5=dimmer, DMX 6)
+  ]
+  # Halogens: warm orange glow
+  color_halogen_on  = 96   # orange
+  color_halogen_off = 0
+  # RGBWs: cyan
+  color_rgb_on  = 57       # cyan
+  color_rgb_off = 0
