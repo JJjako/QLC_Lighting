@@ -534,8 +534,8 @@ impl BridgeState {
             return btn.osc_address.clone();
         }
         note_to_grid(note)
-            .map(|(col, row)| format!("/qlc/custom/{}", grid_to_pad_index(col, row)))
-            .unwrap_or_else(|| "/qlc/custom/unknown".to_string())
+            .map(|(col, row)| format!("/lp/c{}", grid_to_pad_index(col, row)))
+            .unwrap_or_else(|| "/lp/custom/unknown".to_string())
     }
 
     fn ensure_rgbw_state(&mut self, page_idx: usize) {

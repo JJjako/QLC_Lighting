@@ -200,14 +200,14 @@ fader_mode = true
 
   [pages.fader_config]
   addresses = [
-    "/qlc/channel/10",
-    "/qlc/channel/11",
-    "/qlc/channel/12",
-    "/qlc/channel/13",
-    "/qlc/channel/14",
-    "/qlc/channel/15",
-    "/qlc/channel/16",
-    "/qlc/channel/17",
+    "/lp/f1",
+    "/lp/f2",
+    "/lp/f3",
+    "/lp/f4",
+    "/lp/f5",
+    "/lp/f6",
+    "/lp/f7",
+    "/lp/f8",
   ]
   color_on  = 13
   color_off = 0
@@ -292,14 +292,14 @@ flash_fader_mode = true
 
 [pages.fader_config]
 addresses = [
-  "/qlc/channel/50",
-  "/qlc/channel/51",
-  "/qlc/channel/52",
-  "/qlc/channel/53",
-  "/qlc/channel/54",
-  "/qlc/channel/55",
-  "/qlc/channel/56",
-  "/qlc/channel/57",
+  "/lp/ff1",
+  "/lp/ff2",
+  "/lp/ff3",
+  "/lp/ff4",
+  "/lp/ff5",
+  "/lp/ff6",
+  "/lp/ff7",
+  "/lp/ff8",
 ]
 color_on  = 72   # white for active fader steps and flash button
 color_off = 1    # very dim for inactive steps
@@ -309,7 +309,7 @@ selector_color = 79   # pink
 nudge_xy_mode = true
 
 [pages.xy_config]
-pan_address  = "/qlc/channel/1"
-tilt_address = "/qlc/channel/2"
+pan_address  = "/lp/x1"
+tilt_address = "/lp/y1"
 color_inactive = 1     # dim red for center
 color_active   = 72    # white for fine nudges
