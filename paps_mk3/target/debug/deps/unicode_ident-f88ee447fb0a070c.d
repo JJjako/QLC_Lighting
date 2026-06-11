@@ -1,0 +1,8 @@
+C:\Users\jw\Documents\GitHub\QLC_Lighting\paps_mk3\target\debug\deps\unicode_ident-f88ee447fb0a070c.d: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-ident-1.0.24\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-ident-1.0.24\src\tables.rs
+
+C:\Users\jw\Documents\GitHub\QLC_Lighting\paps_mk3\target\debug\deps\libunicode_ident-f88ee447fb0a070c.rlib: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-ident-1.0.24\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-ident-1.0.24\src\tables.rs
+
+C:\Users\jw\Documents\GitHub\QLC_Lighting\paps_mk3\target\debug\deps\libunicode_ident-f88ee447fb0a070c.rmeta: C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-ident-1.0.24\src\lib.rs C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-ident-1.0.24\src\tables.rs
+
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-ident-1.0.24\src\lib.rs:
+C:\Users\jw\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-ident-1.0.24\src\tables.rs:

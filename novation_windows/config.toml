@@ -46,7 +46,7 @@ device_out_name = "LPMiniMK3 MIDI"
 # Any pad NOT listed gets colour 21 (dim green) and auto-address /qlc/custom/<n>.
 [[pages]]
 name = "Custom"
-selector_color = 0   
+selector_color = 21   # dim green
 custom_mode = true    # ← enables long-press colour picker + full-grid OSC
 
   # Optional: explicitly configure some pads.
@@ -189,18 +189,9 @@ xy_mode = true
   [pages.xy_config]
   pan_address    = "/qlc/channel/1"
   tilt_address   = "/qlc/channel/2"
-  color_inactive = 45# blue
-  color_active   = 72# white
-[[pages]]
-name = "MovingHeadsFine"
-selector_color = 53
-xy_mode = true
+  color_inactive = 45
+  color_active   = 72
 
-  [pages.xy_config]
-  pan_address    = "/qlc/channel/3"
-  tilt_address   = "/qlc/channel/4"
-  color_inactive = 53 # purple
-  color_active   = 72# white
 # ── PAGE 4: Dimmer Sliders ────────────────────────────────────────────────────
 [[pages]]
 name = "Dimmers"
@@ -220,3 +211,105 @@ fader_mode = true
   ]
   color_on  = 13
   color_off = 0
+
+# ── PAGE 5: RGBW ──────────────────────────────────────────────────────────────
+# Grid layout (8 cols, 8 rows):
+#   cols 0-1 = Red   fader  (both cols mirror each other)
+#   cols 2-3 = Green fader
+#   cols 4-5 = Blue  fader
+#   cols 6-7 = White fader
+#   Each fader: row 0 (bottom) = step 1 (lowest), row 7 (top) = step 8 (full)
+#   Tap a step to set that level; tap the same step again to turn off.
+#
+# Right-side buttons (CC 89 top → CC 19 bottom):
+#   CC 89 (top)  = profile 0 = MASTER  → controls all 6 fixtures simultaneously
+#   CC 79        = profile 1 = fixture 1
+#   CC 69        = profile 2 = fixture 2
+#   CC 59        = profile 3 = fixture 3
+#   CC 49        = profile 4 = fixture 4
+#   CC 39        = profile 5 = fixture 5
+#   CC 29        = profile 6 = fixture 6
+#   CC 19 (btm)  = unused
+#
+#   Tap a profile button to switch to that fixture.
+#   Tap the ACTIVE profile button to cycle the master dimmer: 0→25→50→75→100→0%
+#
+# State is saved to rgbw_state.json next to config.toml.
+[[pages]]
+name = "RGBW"
+selector_color = 57   # cyan
+rgbw_mode = true
+
+  [pages.rgbw_config]
+  # One OSC address per fixture (6 fixtures) for each channel.
+  # Adjust these to match your QLC+ channel assignments.
+  r_addresses = [
+    "/lp/r1",
+    "/lp/r2",
+    "/lp/r3",
+    "/lp/r4",
+    "/lp/r5",
+    "/lp/r6",
+  ]
+  g_addresses = [
+    "/lp/g1",
+    "/lp/g2",
+    "/lp/g3",
+    "/lp/g4",
+    "/lp/g5",
+    "/lp/g6",
+  ]
+  b_addresses = [
+    "/lp/b1",
+    "/lp/b2",
+    "/lp/b3",
+    "/lp/b4",
+    "/lp/b5",
+    "/lp/b6",
+  ]
+  w_addresses = [
+    "/lp/w1",
+    "/lp/w2",
+    "/lp/w3",
+    "/lp/w4",
+    "/lp/w5",
+    "/lp/w6",
+  ]
+
+# ── PAGE 6: Flash + Fader ─────────────────────────────────────────────────────
+# Each of the 8 columns has:
+#   Row 0 (bottom): momentary flash button
+#     - when pressed: sends current fader value to fader_config.addresses[col]
+#     - when released: sends 0.0 to fader_config.addresses[col]
+#   Rows 1-7: 7-step fader
+#     - step 1 (row 1) = 0.0, step 7 (row 7) = 1.0
+#     - sends to fader_config.addresses[col]
+#     - tap same step again to reset to 0
+[[pages]]
+name = "FlashFader"
+selector_color = 96   # orange
+flash_fader_mode = true
+
+[pages.fader_config]
+addresses = [
+  "/qlc/channel/50",
+  "/qlc/channel/51",
+  "/qlc/channel/52",
+  "/qlc/channel/53",
+  "/qlc/channel/54",
+  "/qlc/channel/55",
+  "/qlc/channel/56",
+  "/qlc/channel/57",
+]
+color_on  = 72   # white for active fader steps and flash button
+color_off = 1    # very dim for inactive steps
+[[pages]]
+name = "Nudge XY"
+selector_color = 79   # pink
+nudge_xy_mode = true
+
+[pages.xy_config]
+pan_address  = "/qlc/channel/1"
+tilt_address = "/qlc/channel/2"
+color_inactive = 1     # dim red for center
+color_active   = 72    # white for fine nudges

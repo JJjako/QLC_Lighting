@@ -3,21 +3,23 @@
 <Workspace xmlns="http://www.qlcplus.org/Workspace" CurrentWindow="VirtualConsole">
  <Creator>
   <Name>Q Light Controller Plus</Name>
-  <Version>4.14.4 GIT</Version>
+  <Version>4.14.4</Version>
   <Author>jw</Author>
  </Creator>
  <Engine>
   <InputOutputMap>
    <BeatGenerator BeatType="Disabled" BPM="0"/>
+   <NetworkServer Type="Native" AutoStart="False" Name="" Password=""/>
    <Universe Name="Universe 1" ID="0">
-    <Output Plugin="DMX USB" UID="None" Line="0"/>
+    <Input Plugin="OSC" UID="127.0.0.1" Line="0" Profile="Novation Test"/>
+    <Output Plugin="ArtNet" UID="192.168.178.26" Line="2"/>
    </Universe>
    <Universe Name="Universe 2" ID="1"/>
    <Universe Name="Universe 3" ID="2"/>
    <Universe Name="Universe 4" ID="3"/>
   </InputOutputMap>
   <Fixture>
-   <Manufacturer>Unsere</Manufacturer>
+   <Manufacturer>Stage Right</Manufacturer>
    <Model>Stage Wash 7x10W LED Moving Head</Model>
    <Mode>14-channel</Mode>
    <ID>0</ID>
@@ -27,7 +29,7 @@
    <Channels>14</Channels>
   </Fixture>
   <Fixture>
-   <Manufacturer>Unsere</Manufacturer>
+   <Manufacturer>Stage Right</Manufacturer>
    <Model>Stage Wash 7x10W LED Moving Head</Model>
    <Mode>14-channel</Mode>
    <ID>1</ID>
@@ -37,7 +39,7 @@
    <Channels>14</Channels>
   </Fixture>
   <Fixture>
-   <Manufacturer>Unsere</Manufacturer>
+   <Manufacturer>Stage Right</Manufacturer>
    <Model>Stage Wash 7x10W LED Moving Head</Model>
    <Mode>14-channel</Mode>
    <ID>2</ID>
@@ -47,7 +49,7 @@
    <Channels>14</Channels>
   </Fixture>
   <Fixture>
-   <Manufacturer>Unsere</Manufacturer>
+   <Manufacturer>Stage Right</Manufacturer>
    <Model>Stage Wash 7x10W LED Moving Head</Model>
    <Mode>14-channel</Mode>
    <ID>3</ID>
@@ -95,6 +97,16 @@
    <Universe>0</Universe>
    <Address>68</Address>
    <Channels>6</Channels>
+  </Fixture>
+  <Fixture>
+   <Manufacturer>Lixada</Manufacturer>
+   <Model>RGBW LED Mini Moving Head</Model>
+   <Mode>14 Channels</Mode>
+   <ID>8</ID>
+   <Name>RGBW LED Mini Moving Head</Name>
+   <Universe>0</Universe>
+   <Address>74</Address>
+   <Channels>14</Channels>
   </Fixture>
   <FixtureGroup ID="0">
    <Name>Moving Heads</Name>
@@ -226,28 +238,28 @@
    <Fixture>
     <ID>0</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>1</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>2</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>3</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
@@ -276,28 +288,28 @@
    <Fixture>
     <ID>0</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>1</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>2</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>3</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
@@ -368,14 +380,14 @@
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
-    <ID>2</ID>
+    <ID>3</ID>
     <Head>0</Head>
     <Mode>0</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
-    <ID>3</ID>
+    <ID>2</ID>
     <Head>0</Head>
     <Mode>0</Mode>
     <Direction>Forward</Direction>
@@ -406,28 +418,28 @@
    <Fixture>
     <ID>0</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>1</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>2</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>3</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
@@ -456,28 +468,28 @@
    <Fixture>
     <ID>0</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>1</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>2</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>3</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
@@ -515,28 +527,28 @@
    <Fixture>
     <ID>0</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>1</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>2</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>3</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
@@ -565,28 +577,28 @@
    <Fixture>
     <ID>0</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>1</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>2</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>3</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
@@ -615,28 +627,28 @@
    <Fixture>
     <ID>0</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>1</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>2</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>3</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
@@ -662,34 +674,6 @@
    </Axis>
   </Function>
   <Function ID="13" Type="EFX" Name="Diamond">
-   <Fixture>
-    <ID>0</ID>
-    <Head>0</Head>
-    <Mode>0</Mode>
-    <Direction>Forward</Direction>
-    <StartOffset>0</StartOffset>
-   </Fixture>
-   <Fixture>
-    <ID>1</ID>
-    <Head>0</Head>
-    <Mode>0</Mode>
-    <Direction>Forward</Direction>
-    <StartOffset>0</StartOffset>
-   </Fixture>
-   <Fixture>
-    <ID>2</ID>
-    <Head>0</Head>
-    <Mode>0</Mode>
-    <Direction>Forward</Direction>
-    <StartOffset>0</StartOffset>
-   </Fixture>
-   <Fixture>
-    <ID>3</ID>
-    <Head>0</Head>
-    <Mode>0</Mode>
-    <Direction>Forward</Direction>
-    <StartOffset>0</StartOffset>
-   </Fixture>
    <PropagationMode>Parallel</PropagationMode>
    <Speed FadeIn="0" FadeOut="0" Duration="20000"/>
    <Direction>Forward</Direction>
@@ -926,28 +910,28 @@
    <Fixture>
     <ID>0</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>1</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>2</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>3</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
@@ -973,7 +957,7 @@
    </Axis>
   </Function>
   <Function ID="39" Type="Chaser" Name=" Regenbogen (manuell) (einzeln)" Path="Regenbogen">
-   <Speed FadeIn="3091" FadeOut="3091" Duration="6183"/>
+   <Speed FadeIn="284" FadeOut="284" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -1016,28 +1000,28 @@
    <Fixture>
     <ID>0</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>1</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>2</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
    <Fixture>
     <ID>3</ID>
     <Head>0</Head>
-    <Mode>0</Mode>
+    <Mode>1</Mode>
     <Direction>Forward</Direction>
     <StartOffset>0</StartOffset>
    </Fixture>
@@ -1196,7 +1180,7 @@
    <FixtureVal ID="6">0,157,1,0,2,255</FixtureVal>
   </Function>
   <Function ID="57" Type="Chaser" Name="vornehintenjuslian (auf takt)" Path="Bewegen">
-   <Speed FadeIn="6183" FadeOut="6183" Duration="6183"/>
+   <Speed FadeIn="569" FadeOut="569" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>PingPong</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1277,7 +1261,7 @@
    <Step Number="1">28</Step>
   </Function>
   <Function ID="70" Type="Chaser" Name="vornehintenjuslian (auf takt) mies langsam" Path="Bewegen">
-   <Speed FadeIn="12366" FadeOut="12366" Duration="12366"/>
+   <Speed FadeIn="1138" FadeOut="1138" Duration="1138"/>
    <Direction>Forward</Direction>
    <RunOrder>PingPong</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1298,7 +1282,7 @@
    <Step Number="1">56</Step>
   </Function>
   <Function ID="74" Type="Chaser" Name=" Regenbogen (manuell) (lahm)" Path="Regenbogen">
-   <Speed FadeIn="0" FadeOut="12366" Duration="12366"/>
+   <Speed FadeIn="0" FadeOut="1138" Duration="1138"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1323,7 +1307,7 @@
    <Step Number="1" FadeIn="0" Hold="0" FadeOut="0">75</Step>
   </Function>
   <Function ID="81" Type="Chaser" Name=" Regenbogen (manuell)" Path="Regenbogen">
-   <Speed FadeIn="3091" FadeOut="3091" Duration="6183"/>
+   <Speed FadeIn="284" FadeOut="284" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1422,7 +1406,7 @@
    <FixtureVal ID="6">0,255,1,255,2,0</FixtureVal>
   </Function>
   <Function ID="92" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (ein)" Path="Regenbogen">
-   <Speed FadeIn="3091" FadeOut="3091" Duration="6183"/>
+   <Speed FadeIn="284" FadeOut="284" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -1450,7 +1434,7 @@
    <FixtureVal ID="6">0,127,1,255,2,0</FixtureVal>
   </Function>
   <Function ID="94" Type="Chaser" Name=" Regenbogen (manuell) (ein)" Path="Regenbogen">
-   <Speed FadeIn="6183" FadeOut="6183" Duration="6183"/>
+   <Speed FadeIn="569" FadeOut="569" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1875,7 +1859,7 @@
    <Step Number="11" FadeIn="0" Hold="834" FadeOut="0">124</Step>
   </Function>
   <Function ID="135" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (ein) (keine Drums)" Path="Regenbogen">
-   <Speed FadeIn="3091" FadeOut="3091" Duration="6183"/>
+   <Speed FadeIn="284" FadeOut="284" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -1893,7 +1877,7 @@
    <Step Number="11" FadeIn="0" Hold="834" FadeOut="0">113</Step>
   </Function>
   <Function ID="136" Type="Chaser" Name=" Regenbogen (manuell) (ein) (keine Drums)" Path="Regenbogen">
-   <Speed FadeIn="6183" FadeOut="6183" Duration="6183"/>
+   <Speed FadeIn="569" FadeOut="569" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1911,7 +1895,7 @@
    <Step Number="11" FadeIn="0" Hold="834" FadeOut="0">113</Step>
   </Function>
   <Function ID="137" Type="Chaser" Name=" Regenbogen (manuell) (2)" Path="Regenbogen">
-   <Speed FadeIn="6183" FadeOut="6183" Duration="6183"/>
+   <Speed FadeIn="569" FadeOut="569" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -1929,7 +1913,7 @@
    <Step Number="11" FadeIn="839" Hold="0" FadeOut="839">106</Step>
   </Function>
   <Function ID="138" Type="Chaser" Name=" Regenbogen (manuell) (einzeln) (2)" Path="Regenbogen">
-   <Speed FadeIn="3091" FadeOut="3091" Duration="6183"/>
+   <Speed FadeIn="284" FadeOut="284" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Default" FadeOut="Default" Duration="Common"/>
@@ -2123,7 +2107,7 @@
    <FixtureVal ID="6">0,0,1,125,2,255,3,0</FixtureVal>
   </Function>
   <Function ID="157" Type="Chaser" Name=" Regenbogen (manuell) (ein) (grünblau)" Path="Regenbogen">
-   <Speed FadeIn="3091" FadeOut="3091" Duration="6183"/>
+   <Speed FadeIn="284" FadeOut="284" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -2172,7 +2156,7 @@
    <FixtureVal ID="3">0,0,1,0,2,255,3,0</FixtureVal>
   </Function>
   <Function ID="162" Type="Chaser" Name="hochrunter" Path="Auftritte/Auftritt 2025 Cue lists">
-   <Speed FadeIn="24732" FadeOut="0" Duration="24732"/>
+   <Speed FadeIn="2276" FadeOut="0" Duration="2276"/>
    <Direction>Forward</Direction>
    <RunOrder>Loop</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -2299,7 +2283,7 @@
    <Step Number="0">86</Step>
   </Function>
   <Function ID="180" Type="Chaser" Name=" Regenbogen (manuell) (ein) (bläulich)" Path="Regenbogen">
-   <Speed FadeIn="3091" FadeOut="3091" Duration="6183"/>
+   <Speed FadeIn="284" FadeOut="284" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -2317,7 +2301,7 @@
    <Step Number="1">175</Step>
   </Function>
   <Function ID="183" Type="Chaser" Name=" Regenbogen (manuell) (ein) (rötlich)" Path="Regenbogen">
-   <Speed FadeIn="3091" FadeOut="3091" Duration="6183"/>
+   <Speed FadeIn="284" FadeOut="284" Duration="569"/>
    <Direction>Forward</Direction>
    <RunOrder>Random</RunOrder>
    <SpeedModes FadeIn="Common" FadeOut="Common" Duration="Common"/>
@@ -2412,7 +2396,7 @@
    <FixtureVal ID="7">0,0,1,0,2,0,3,0,4,0,5,0</FixtureVal>
   </Function>
   <Monitor DisplayMode="0" ShowLabels="0">
-   <Font>Sans Serif,9,-1,5,50,0,0,0,0,0</Font>
+   <Font>Sans Serif,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1</Font>
    <ChannelStyle>0</ChannelStyle>
    <ValueStyle>0</ValueStyle>
    <Grid Width="5" Height="3" Depth="5" Units="0"/>
@@ -2891,19 +2875,6 @@
      <Key>-</Key>
      <Intensity Adjust="False">100</Intensity>
     </Button>
-    <Button Caption="NoFunc" ID="99" Icon="">
-     <WindowState Visible="True" X="515" Y="0" Width="50" Height="50"/>
-     <Appearance>
-      <FrameStyle>None</FrameStyle>
-      <ForegroundColor>Default</ForegroundColor>
-      <BackgroundColor>Default</BackgroundColor>
-      <BackgroundImage>None</BackgroundImage>
-      <Font>Default</Font>
-     </Appearance>
-     <Function ID="85"/>
-     <Action>Toggle</Action>
-     <Intensity Adjust="False">100</Intensity>
-    </Button>
     <Button Caption="Man(rot)" ID="0" Icon="">
      <WindowState Visible="True" X="245" Y="60" Width="125" Height="30"/>
      <Appearance>
@@ -3018,7 +2989,7 @@
     </Appearance>
     <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None" Monitor="true">Level</SliderMode>
     <Reset/>
-    <Level LowLimit="0" HighLimit="255" Value="237">
+    <Level LowLimit="0" HighLimit="255" Value="0">
      <Channel Fixture="0">4</Channel>
      <Channel Fixture="1">4</Channel>
      <Channel Fixture="2">4</Channel>
@@ -3080,7 +3051,7 @@
     <Visibility>101</Visibility>
     <AbsoluteValue Minimum="0" Maximum="10000"/>
     <ResetFactorOnDialChange>True</ResetFactorOnDialChange>
-    <Time>6183</Time>
+    <Time>569</Time>
     <Key>Return</Key>
     <MultKey>F</MultKey>
     <DivKey>G</DivKey>
@@ -3265,7 +3236,7 @@
      <ForegroundColor>Default</ForegroundColor>
      <BackgroundColor>Default</BackgroundColor>
      <BackgroundImage>None</BackgroundImage>
-     <Font>Sans Serif,9,-1,5,50,0,0,0,0,0</Font>
+     <Font>Sans Serif,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1</Font>
     </Appearance>
    </Clock>
    <SpeedDial Caption="Duration" ID="94">
@@ -3422,8 +3393,29 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <Pan Position="162"/>
-     <Tilt Position="104"/>
+     <Fixture ID="0" Head="0">
+      <Axis ID="X" LowLimit="0" HighLimit="1" Reverse="False"/>
+      <Axis ID="Y" LowLimit="0" HighLimit="1" Reverse="False"/>
+     </Fixture>
+     <Fixture ID="1" Head="0">
+      <Axis ID="X" LowLimit="0" HighLimit="1" Reverse="False"/>
+      <Axis ID="Y" LowLimit="0" HighLimit="1" Reverse="False"/>
+     </Fixture>
+     <Fixture ID="3" Head="0">
+      <Axis ID="X" LowLimit="0" HighLimit="1" Reverse="False"/>
+      <Axis ID="Y" LowLimit="0" HighLimit="1" Reverse="False"/>
+     </Fixture>
+     <Fixture ID="2" Head="0">
+      <Axis ID="X" LowLimit="0" HighLimit="1" Reverse="False"/>
+      <Axis ID="Y" LowLimit="0" HighLimit="1" Reverse="False"/>
+     </Fixture>
+     <Window hMin="82" hMax="169" vMin="59" vMax="79"/>
+     <Pan Position="128">
+      <Input Universe="0" Channel="4774"/>
+     </Pan>
+     <Tilt Position="69">
+      <Input Universe="0" Channel="8253"/>
+     </Tilt>
     </XYPad>
     <XYPad Caption="XY Pad" ID="32" InvertedAppearance="0">
      <WindowState Visible="True" X="280" Y="85" Width="230" Height="230"/>
@@ -3434,8 +3426,13 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <Pan Position="87"/>
-     <Tilt Position="100"/>
+     <Window hMin="0" hMax="256" vMin="10" vMax="256"/>
+     <Pan Position="136">
+      <Input Universe="0" Channel="4774"/>
+     </Pan>
+     <Tilt Position="140">
+      <Input Universe="0" Channel="8253"/>
+     </Tilt>
     </XYPad>
     <XYPad Caption="XY Pad" ID="33" InvertedAppearance="0">
      <WindowState Visible="True" X="565" Y="85" Width="230" Height="230"/>
@@ -3446,8 +3443,12 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <Pan Position="97"/>
-     <Tilt Position="176"/>
+     <Pan Position="136">
+      <Input Universe="0" Channel="4774"/>
+     </Pan>
+     <Tilt Position="136">
+      <Input Universe="0" Channel="8253"/>
+     </Tilt>
     </XYPad>
     <XYPad Caption="XY Pad" ID="34" InvertedAppearance="0">
      <WindowState Visible="True" X="835" Y="85" Width="230" Height="230"/>
@@ -3458,8 +3459,12 @@
       <BackgroundImage>None</BackgroundImage>
       <Font>Default</Font>
      </Appearance>
-     <Pan Position="59"/>
-     <Tilt Position="144"/>
+     <Pan Position="136">
+      <Input Universe="0" Channel="4774"/>
+     </Pan>
+     <Tilt Position="136">
+      <Input Universe="0" Channel="8253"/>
+     </Tilt>
     </XYPad>
     <Label Caption="Moving 1" ID="35">
      <WindowState Visible="True" X="0" Y="40" Width="230" Height="30"/>
@@ -3544,6 +3549,54 @@
     <Playback/>
     <Stop/>
    </CueList>
+   <Slider Caption="Slider 40" ID="40" WidgetStyle="Slider" InvertedAppearance="false">
+    <WindowState Visible="True" X="930" Y="65" Width="60" Height="200"/>
+    <Appearance>
+     <FrameStyle>Sunken</FrameStyle>
+     <ForegroundColor>Default</ForegroundColor>
+     <BackgroundColor>Default</BackgroundColor>
+     <BackgroundImage>None</BackgroundImage>
+     <Font>Default</Font>
+    </Appearance>
+    <Input Universe="0" Channel="26293"/>
+    <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
+    <Level LowLimit="0" HighLimit="255" Value="0"/>
+    <Playback>
+     <Function>183</Function>
+    </Playback>
+   </Slider>
+   <Slider Caption="Slider 41" ID="41" WidgetStyle="Slider" InvertedAppearance="false">
+    <WindowState Visible="True" X="995" Y="65" Width="60" Height="200"/>
+    <Appearance>
+     <FrameStyle>Sunken</FrameStyle>
+     <ForegroundColor>Default</ForegroundColor>
+     <BackgroundColor>Default</BackgroundColor>
+     <BackgroundImage>None</BackgroundImage>
+     <Font>Default</Font>
+    </Appearance>
+    <Input Universe="0" Channel="30524"/>
+    <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
+    <Level LowLimit="0" HighLimit="255" Value="0"/>
+    <Playback>
+     <Function>180</Function>
+    </Playback>
+   </Slider>
+   <Slider Caption="Slider 42" ID="42" WidgetStyle="Slider" InvertedAppearance="false">
+    <WindowState Visible="True" X="1060" Y="65" Width="60" Height="200"/>
+    <Appearance>
+     <FrameStyle>Sunken</FrameStyle>
+     <ForegroundColor>Default</ForegroundColor>
+     <BackgroundColor>Default</BackgroundColor>
+     <BackgroundImage>None</BackgroundImage>
+     <Font>Default</Font>
+    </Appearance>
+    <Input Universe="0" Channel="17831"/>
+    <SliderMode ValueDisplayStyle="Exact" ClickAndGoType="None">Playback</SliderMode>
+    <Level LowLimit="0" HighLimit="255" Value="0"/>
+    <Playback>
+     <Function>157</Function>
+    </Playback>
+   </Slider>
   </Frame>
   <Properties>
    <Size Width="2300" Height="1500"/>
