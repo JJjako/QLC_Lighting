@@ -6,7 +6,10 @@
  *   - Custom:  all 64 pads freely assignable; long-press opens on-pad colour picker
  *   - XY:      8x8 grid -> pan/tilt OSC for moving heads
  *   - Fader:   columns = 8-step dimmer faders
+ *   - Main:    triggers; cols 2-3 = 16-way fader-A selector; col 4 = live fader;
+ *              col 6 = fader-B selector; col 7 = flash fader (16 OSC addresses)
  *   - RGBW:    4 channels (R,G,B,W) x 2 cols wide = full 8-step faders
+ *   - Nudge XY: nudge rings + master / 4 fixture pan-tilt profiles (right-side CCs)
  *
  *              Right-side buttons (CC 89 top -> CC 19 bottom):
  *                CC 89 = profile 0 = MASTER  (sends to all fixtures)
@@ -75,21 +78,14 @@ struct PageConfig {
     custom_mode: bool,
     #[serde(default)]
     rgbw_mode: bool,
-    /*
-     * nudge_xy_mode: XY pad with concentric nudge rings.
-     * Outer ring (2 pads) = coarse nudges, middle ring = medium, inner ring = fine.
-     * Uses xy_config for pan/tilt OSC addresses.
-     */
     #[serde(default)]
     nudge_xy_mode: bool,
-    /*
-     * flash_fader_mode: bottom row = momentary flash buttons (sends fader value on
-     * press, 0.0 on release), rows 1-7 = 7-step fader for that column.
-     * Reuses fader_config for addresses and colours.
-     */
     #[serde(default)]
     flash_fader_mode: bool,
+    #[serde(default)]
+    main_mode: bool,
     xy_config: Option<XyConfig>,
+    nudge_xy_config: Option<NudgeXyConfig>,
     fader_config: Option<FaderConfig>,
     rgbw_config: Option<RgbwConfig>,
 }
@@ -112,8 +108,15 @@ struct XyConfig {
 }
 
 #[derive(Debug, Deserialize, Clone)]
+struct NudgeXyConfig {
+    pan_addresses: Vec<String>,
+    tilt_addresses: Vec<String>,
+}
+
+#[derive(Debug, Deserialize, Clone)]
 struct FaderConfig {
     addresses: Vec<String>,
+    flash_addresses: Vec<String>,
     color_on: u8,
     color_off: u8,
 }
@@ -156,18 +159,22 @@ const CH_B: usize = 2;
 const CH_W: usize = 3;
 
 const RGBW_COLOR_R_ON:  u8 = 5;
-const RGBW_COLOR_R_OFF: u8 = 1;
+const RGBW_COLOR_R_OFF: u8 = 0;
 const RGBW_COLOR_G_ON:  u8 = 21;
-const RGBW_COLOR_G_OFF: u8 = 17;
+const RGBW_COLOR_G_OFF: u8 = 0;
 const RGBW_COLOR_B_ON:  u8 = 45;
-const RGBW_COLOR_B_OFF: u8 = 41;
-const RGBW_COLOR_W_ON:  u8 = 72;
-const RGBW_COLOR_W_OFF: u8 = 1;
+const RGBW_COLOR_B_OFF: u8 = 0;
+const RGBW_COLOR_W_ON:  u8 = 3;
+const RGBW_COLOR_W_OFF: u8 = 0;
 
-const PROFILE_COLOR_MASTER:  u8 = 72; /* white  */
+const PROFILE_COLOR_MASTER:  u8 = 3; /* white  */
 const PROFILE_COLOR_FIXTURE: u8 = 45; /* blue   */
 const PROFILE_COLOR_ACTIVE:  u8 = 13; /* yellow */
 const PROFILE_COLOR_UNUSED:  u8 = 0;
+
+/* Nudge XY: profile 0 = master, profiles 1–4 = individual heads */
+const NUDGE_XY_NUM_PROFILES: usize = 5;
+const NUDGE_XY_DEFAULT: f32 = 0.5;
 
 /* ────────────────────────────────────────────────────────────────────────────
  * SysEx / MIDI helpers
@@ -333,6 +340,59 @@ fn picker_cell_for_color(color: u8) -> Option<(u8, u8)> {
 
 const LONG_PRESS_MS: u64 = 500;
 
+const MAIN_NUM_FADERS: usize = 16;
+
+/* Main-page layout (0-indexed cols/rows, row 0 = bottom) */
+const MAIN_FADER_LEFT: u8 = 4;
+const MAIN_SELECTOR_RIGHT: u8 = 6;
+const MAIN_FLASH_FADER: u8 = 7;
+
+/* Fader-A selector: cols 2–3 × 8 rows = 16 slots */
+const MAIN_SELECTOR_A_COLS: [u8; 2] = [2, 3];
+
+const MAIN_SELECTOR_ACTIVE: u8 = 72;   /* white  */
+const MAIN_SELECTOR_INACTIVE: u8 = 45; /* blue   */
+
+fn main_selector_a_slot(col: u8, row: u8) -> Option<usize> {
+    if !MAIN_SELECTOR_A_COLS.contains(&col) {
+        return None;
+    }
+    let base = if col == 2 { 0usize } else { 8 };
+    Some(base + row as usize)
+}
+
+fn main_is_selector_a(col: u8, row: u8) -> bool {
+    main_selector_a_slot(col, row).is_some()
+}
+
+fn main_is_selector_b(col: u8) -> bool {
+    col == MAIN_SELECTOR_RIGHT
+}
+
+/* Trigger pads: cols 0–1 (full height), col 5 rows 0–5 */
+fn main_is_button_cell(col: u8, row: u8) -> bool {
+    if col <= 1 {
+        return true;
+    }
+    col == 5 && row <= 5
+}
+
+fn main_is_fader_a(col: u8, _row: u8) -> bool {
+    col == MAIN_FADER_LEFT
+}
+
+fn main_is_flash_fader_b(col: u8) -> bool {
+    col == MAIN_FLASH_FADER
+}
+
+fn main_a_level_to_osc(level: u8) -> f32 {
+    if level == 0 { 0.0 } else { (level - 1) as f32 / 7.0 }
+}
+
+fn main_b_level_to_osc(level: u8) -> f32 {
+    if level == 0 { 0.0 } else { (level - 1) as f32 / 6.0 }
+}
+
 /* ────────────────────────────────────────────────────────────────────────────
  * RGBW state
  * ──────────────────────────────────────────────────────────────────────────── */
@@ -359,6 +419,33 @@ impl Default for RgbwState {
     fn default() -> Self {
         Self {
             profiles: std::array::from_fn(|_| RgbwProfile::default()),
+            active_profile: 0,
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+struct NudgeXyProfile {
+    pan: f32,
+    tilt: f32,
+}
+
+impl Default for NudgeXyProfile {
+    fn default() -> Self {
+        Self { pan: NUDGE_XY_DEFAULT, tilt: NUDGE_XY_DEFAULT }
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct NudgeXyState {
+    profiles: [NudgeXyProfile; NUDGE_XY_NUM_PROFILES],
+    active_profile: usize,
+}
+
+impl Default for NudgeXyState {
+    fn default() -> Self {
+        Self {
+            profiles: std::array::from_fn(|_| NudgeXyProfile::default()),
             active_profile: 0,
         }
     }
@@ -394,13 +481,18 @@ struct BridgeState {
     colors_path: String,
     rgbw_states: HashMap<usize, RgbwState>,
     rgbw_path: String,
+    nudge_xy_states: HashMap<usize, NudgeXyState>,
+    nudge_xy_path: String,
     /* Track if CC 19 (colour picker modifier) is held down */
     color_picker_modifier_active: bool,
     /* Track which flash button columns are currently pressed (for rendering) */
     flash_buttons_pressed: Vec<bool>,
-    /* Per-page pan/tilt tracking for nudge mode (key = page_idx) */
-    nudge_pan: HashMap<usize, f32>,
-    nudge_tilt: HashMap<usize, f32>,
+    /* Main page: OSC slot selection per column (independent) */
+    main_fader_a: usize,
+    main_fader_b: usize,
+    /* Main page: column fader heights — independent of slot selection */
+    main_level_a: u8,
+    main_level_b: u8,
 }
 
 /* ── Persistence ────────────────────────────────────────────────────────────── */
@@ -425,7 +517,7 @@ fn colors_from_file(file: ColorsFile) -> HashMap<(usize, u8), u8> {
 }
 
 impl BridgeState {
-    fn new(config: Config, colors_path: String, rgbw_path: String) -> Result<Self> {
+    fn new(config: Config, colors_path: String, rgbw_path: String, nudge_xy_path: String) -> Result<Self> {
         let socket = UdpSocket::bind("0.0.0.0:0").context("bind UDP")?;
         let target = format!("{}:{}", config.osc.host, config.osc.port);
 
@@ -448,9 +540,14 @@ impl BridgeState {
             .and_then(|s| serde_json::from_str(&s).ok())
             .unwrap_or_default();
 
+        let nudge_xy_states: HashMap<usize, NudgeXyState> = std::fs::read_to_string(&nudge_xy_path)
+            .ok()
+            .and_then(|s| serde_json::from_str(&s).ok())
+            .unwrap_or_default();
+
         info!(
-            "Loaded {} custom colour(s), {} fader colour(s), {} RGBW page state(s)",
-            custom_colors.len(), fader_colors.len(), rgbw_states.len()
+            "Loaded {} custom colour(s), {} fader colour(s), {} RGBW page state(s), {} nudge XY state(s)",
+            custom_colors.len(), fader_colors.len(), rgbw_states.len(), nudge_xy_states.len()
         );
 
         Ok(Self {
@@ -466,10 +563,14 @@ impl BridgeState {
             colors_path,
             rgbw_states,
             rgbw_path,
+            nudge_xy_states,
+            nudge_xy_path,
             color_picker_modifier_active: false,
             flash_buttons_pressed: vec![false; 8],
-            nudge_pan: HashMap::new(),
-            nudge_tilt: HashMap::new(),
+            main_fader_a: 0,
+            main_fader_b: 0,
+            main_level_a: 0,
+            main_level_b: 0,
             config,
         })
     }
@@ -524,8 +625,14 @@ impl BridgeState {
 
     fn custom_button_color(&self, page_idx: usize, note: u8) -> u8 {
         if let Some(&c) = self.custom_colors.get(&(page_idx, note)) { return c; }
-        self.config.pages[page_idx].buttons.iter()
-            .find(|b| b.note == note).map(|b| b.color).unwrap_or(21)
+        let page = &self.config.pages[page_idx];
+        if let Some(btn) = page.buttons.iter().find(|b| b.note == note) {
+            return btn.color;
+        }
+        if page.main_mode {
+            return self.main_default_button_color(page_idx, note);
+        }
+        21
     }
 
     fn custom_osc_address(&self, page_idx: usize, note: u8) -> String {
@@ -533,13 +640,40 @@ impl BridgeState {
         if let Some(btn) = page.buttons.iter().find(|b| b.note == note) {
             return btn.osc_address.clone();
         }
+        if self.config.pages[page_idx].main_mode {
+            return format!("/lp/main/{}", note);
+        }
         note_to_grid(note)
             .map(|(col, row)| format!("/lp/c{}", grid_to_pad_index(col, row)))
             .unwrap_or_else(|| "/lp/custom/unknown".to_string())
     }
 
+    fn main_default_button_color(&self, _page_idx: usize, note: u8) -> u8 {
+        if let Some((col, row)) = note_to_grid(note) {
+            if main_is_selector_a(col, row) || main_is_selector_b(col) {
+                return MAIN_SELECTOR_INACTIVE;
+            }
+        }
+        21 /* dim green */
+    }
+
     fn ensure_rgbw_state(&mut self, page_idx: usize) {
         self.rgbw_states.entry(page_idx).or_default();
+    }
+
+    fn save_nudge_xy(&self) {
+        match serde_json::to_string_pretty(&self.nudge_xy_states) {
+            Ok(json) => {
+                if let Err(e) = std::fs::write(&self.nudge_xy_path, json) {
+                    error!("Save nudge XY: {}", e);
+                }
+            }
+            Err(e) => error!("Serialise nudge XY: {}", e),
+        }
+    }
+
+    fn ensure_nudge_xy_state(&mut self, page_idx: usize) {
+        self.nudge_xy_states.entry(page_idx).or_default();
     }
 }
 
@@ -621,6 +755,8 @@ fn render_page(state: &BridgeState, out: &mut MidiOutputConnection) {
                 }
             }
         }
+    } else if page.main_mode {
+        render_main(state, &mut pairs);
     } else if page.custom_mode {
         for row in 0u8..8 {
             for col in 0u8..8 {
@@ -629,59 +765,9 @@ fn render_page(state: &BridgeState, out: &mut MidiOutputConnection) {
             }
         }
     } else if page.nudge_xy_mode {
-        if let Some(xy) = &page.xy_config {
-            for row in 0u8..8 {
-                for col in 0u8..8 {
-                    /* Nudge layout with explicit colour mapping:
-                     * B=black(1)=unprecise  Bl=blue(45)=medium  M=magenta(53)=precise  W=white(72)=finest
-                     *
-                     * B,B,Bl,Bl,Bl,Bl,B,B      (row 7 = top)
-                     * B,B,M,M,M,M,B,B
-                     * Bl,M,B,W,W,B,M,Bl
-                     * Bl,M,W,B,B,W,M,Bl
-                     * Bl,M,W,B,B,W,M,Bl
-                     * Bl,M,B,W,W,B,M,Bl
-                     * B,B,M,M,M,M,B,B
-                     * B,B,Bl,Bl,Bl,Bl,B,B    (row 0 = bottom)
-                     */
-                    let color = match (col, row) {
-                        /* Row 7 (top) */
-                        (0, 7) | (1, 7) | (6, 7) | (7, 7) => 1,       /* B = black */
-                        (2, 7) | (3, 7) | (4, 7) | (5, 7) => 45,      /* Bl = blue */
-                        /* Row 6 */
-                        (0, 6) | (1, 6) | (6, 6) | (7, 6) => 1,       /* B */
-                        (2, 6) | (3, 6) | (4, 6) | (5, 6) => 53,      /* M = magenta */
-                        /* Row 5 */
-                        (0, 5) | (7, 5) => 45,                        /* Bl */
-                        (1, 5) | (6, 5) => 53,                        /* M */
-                        (2, 5) | (5, 5) => 1,                         /* B */
-                        (3, 5) | (4, 5) => 72,                        /* W = white */
-                        /* Row 4 */
-                        (0, 4) | (7, 4) => 45,                        /* Bl */
-                        (1, 4) | (6, 4) => 53,                        /* M */
-                        (2, 4) | (5, 4) => 72,                        /* W */
-                        (3, 4) | (4, 4) => 1,                         /* B */
-                        /* Row 3 (same as row 4) */
-                        (0, 3) | (7, 3) => 45,                        /* Bl */
-                        (1, 3) | (6, 3) => 53,                        /* M */
-                        (2, 3) | (5, 3) => 72,                        /* W */
-                        (3, 3) | (4, 3) => 1,                         /* B */
-                        /* Row 2 (same as row 5) */
-                        (0, 2) | (7, 2) => 45,                        /* Bl */
-                        (1, 2) | (6, 2) => 53,                        /* M */
-                        (2, 2) | (5, 2) => 1,                         /* B */
-                        (3, 2) | (4, 2) => 72,                        /* W */
-                        /* Row 1 */
-                        (0, 1) | (1, 1) | (6, 1) | (7, 1) => 1,       /* B */
-                        (2, 1) | (3, 1) | (4, 1) | (5, 1) => 53,      /* M */
-                        /* Row 0 (bottom) */
-                        (0, 0) | (1, 0) | (6, 0) | (7, 0) => 1,       /* B */
-                        (2, 0) | (3, 0) | (4, 0) | (5, 0) => 45,      /* Bl */
-                        _ => xy.color_inactive,
-                    };
-                    pairs.push((grid_note(col, row), color));
-                }
-            }
+        render_nudge_xy_grid(state, &mut pairs);
+        if page.nudge_xy_config.is_some() {
+            render_nudge_xy_profiles(state, state.current_page, &mut pairs);
         }
     } else if page.xy_mode {
         if let Some(xy) = &page.xy_config {
@@ -732,6 +818,135 @@ fn render_page(state: &BridgeState, out: &mut MidiOutputConnection) {
 
     if let Err(e) = out.send(&sysex_set_leds_bulk(&pairs)) {
         error!("LED SysEx: {}", e);
+    }
+}
+
+fn render_main(state: &BridgeState, pairs: &mut Vec<(u8, u8)>) {
+    let page_idx = state.current_page;
+    let page     = &state.config.pages[page_idx];
+    let fader    = match &page.fader_config {
+        Some(f) => f,
+        None => return,
+    };
+
+    for row in 0u8..8 {
+        for col in 0u8..8 {
+            let note = grid_note(col, row);
+
+            if main_is_button_cell(col, row) {
+                pairs.push((note, state.custom_button_color(page_idx, note)));
+                continue;
+            }
+
+            if let Some(slot) = main_selector_a_slot(col, row) {
+                let color = if slot == state.main_fader_a {
+                    state.custom_colors.get(&(page_idx, note)).copied()
+                        .unwrap_or(MAIN_SELECTOR_ACTIVE)
+                } else {
+                    state.custom_colors.get(&(page_idx, note)).copied()
+                        .unwrap_or(MAIN_SELECTOR_INACTIVE)
+                };
+                pairs.push((note, color));
+                continue;
+            }
+
+            if main_is_selector_b(col) {
+                let slot  = row as usize;
+                let color = if slot == state.main_fader_b {
+                    state.custom_colors.get(&(page_idx, note)).copied()
+                        .unwrap_or(MAIN_SELECTOR_ACTIVE)
+                } else {
+                    state.custom_colors.get(&(page_idx, note)).copied()
+                        .unwrap_or(MAIN_SELECTOR_INACTIVE)
+                };
+                pairs.push((note, color));
+                continue;
+            }
+
+            if main_is_fader_a(col, row) {
+                let slot      = state.main_fader_a;
+                let level     = state.main_level_a;
+                let color_on  = state.get_fader_color(page_idx, slot as u8);
+                let color_off = fader.color_off;
+                let step      = row + 1;
+                let color     = if level >= step { color_on } else { color_off };
+                pairs.push((note, color));
+                continue;
+            }
+
+            if main_is_flash_fader_b(col) {
+                let slot               = state.main_fader_b;
+                let level              = state.main_level_b;
+                let color_on           = state.get_fader_color(page_idx, slot as u8);
+                let is_flash_pressed   = state.flash_buttons_pressed[7];
+                let color = if row == 0 {
+                    if is_flash_pressed { color_on } else { 1 }
+                } else if level >= row {
+                    color_on
+                } else {
+                    fader.color_off
+                };
+                pairs.push((note, color));
+            }
+        }
+    }
+}
+
+fn render_nudge_xy_grid(state: &BridgeState, pairs: &mut Vec<(u8, u8)>) {
+    let page = &state.config.pages[state.current_page];
+    let inactive = page.xy_config.as_ref().map(|xy| xy.color_inactive).unwrap_or(1);
+    for row in 0u8..8 {
+        for col in 0u8..8 {
+            let color = match (col, row) {
+                (0, 7) | (1, 7) | (6, 7) | (7, 7) => 1,
+                (2, 7) | (3, 7) | (4, 7) | (5, 7) => 45,
+                (0, 6) | (1, 6) | (6, 6) | (7, 6) => 1,
+                (2, 6) | (3, 6) | (4, 6) | (5, 6) => 53,
+                (0, 5) | (7, 5) => 45,
+                (1, 5) | (6, 5) => 53,
+                (2, 5) | (5, 5) => 1,
+                (3, 5) | (4, 5) => 72,
+                (0, 4) | (7, 4) => 45,
+                (1, 4) | (6, 4) => 53,
+                (2, 4) | (5, 4) => 72,
+                (3, 4) | (4, 4) => 1,
+                (0, 3) | (7, 3) => 45,
+                (1, 3) | (6, 3) => 53,
+                (2, 3) | (5, 3) => 72,
+                (3, 3) | (4, 3) => 1,
+                (0, 2) | (7, 2) => 45,
+                (1, 2) | (6, 2) => 53,
+                (2, 2) | (5, 2) => 1,
+                (3, 2) | (4, 2) => 72,
+                (0, 1) | (1, 1) | (6, 1) | (7, 1) => 1,
+                (2, 1) | (3, 1) | (4, 1) | (5, 1) => 53,
+                (0, 0) | (1, 0) | (6, 0) | (7, 0) => 1,
+                (2, 0) | (3, 0) | (4, 0) | (5, 0) => 45,
+                _ => inactive,
+            };
+            pairs.push((grid_note(col, row), color));
+        }
+    }
+}
+
+fn render_nudge_xy_profiles(state: &BridgeState, page_idx: usize, pairs: &mut Vec<(u8, u8)>) {
+    let rs = &state.nudge_xy_states[&page_idx];
+    for i in 0usize..8 {
+        let color = if i <= 2 {
+            PROFILE_COLOR_UNUSED
+        } else {
+            let prof_idx = 7 - i; /* 7->0 master, 6->1, 5->2, 4->3, 3->4 */
+            if prof_idx >= NUDGE_XY_NUM_PROFILES {
+                PROFILE_COLOR_UNUSED
+            } else if prof_idx == rs.active_profile {
+                PROFILE_COLOR_ACTIVE
+            } else if prof_idx == 0 {
+                PROFILE_COLOR_MASTER
+            } else {
+                PROFILE_COLOR_FIXTURE
+            }
+        };
+        pairs.push((RIGHT_CC[i], color));
     }
 }
 
@@ -813,21 +1028,30 @@ fn handle_midi(message: &[u8], state: &mut BridgeState, out: &mut MidiOutputConn
                     info!("Page -> {} ({})", page_idx, state.config.pages[page_idx].name);
                     state.current_page = page_idx;
                     state.fader_levels = vec![0u8; 8];
+                    state.main_fader_a = 0;
+                    state.main_fader_b = 0;
+                    state.main_level_a = 0;
+                    state.main_level_b = 0;
                     state.xy_selected  = None;
                     state.press_times.clear();
                     /* nudge values persist across pages; remove this if you want to reset them */
                     if state.config.pages[page_idx].rgbw_mode {
                         state.ensure_rgbw_state(page_idx);
                     }
+                    if state.config.pages[page_idx].nudge_xy_mode {
+                        state.ensure_nudge_xy_state(page_idx);
+                    }
                     render_page(state, out);
                 }
                 return;
             }
 
-            /* right-side profile buttons: only active on RGBW pages */
-            if state.config.pages[state.current_page].rgbw_mode {
-                if let Some(right_idx) = RIGHT_CC.iter().position(|&cc| cc == data1) {
+            let page_now = &state.config.pages[state.current_page];
+            if let Some(right_idx) = RIGHT_CC.iter().position(|&cc| cc == data1) {
+                if page_now.rgbw_mode {
                     handle_rgbw_profile(right_idx, state, out);
+                } else if page_now.nudge_xy_mode && page_now.nudge_xy_config.is_some() {
+                    handle_nudge_xy_profile(right_idx, state, out);
                 }
             }
         }
@@ -870,7 +1094,27 @@ fn handle_midi(message: &[u8], state: &mut BridgeState, out: &mut MidiOutputConn
             /* ── Modifier active: open colour picker on next Note On ──────────── */
             if state.color_picker_modifier_active {
                 let page = &state.config.pages[state.current_page];
-                if page.custom_mode {
+                if page.custom_mode || page.main_mode {
+                    if page.main_mode {
+                        if let Some((col, row)) = note_to_grid(note) {
+                            if main_is_fader_a(col, row) {
+                                state.overlay = Overlay::FlashFaderColorPicker {
+                                    page_idx: state.current_page,
+                                    col: state.main_fader_a as u8,
+                                };
+                                render_page(state, out);
+                                return;
+                            }
+                            if main_is_flash_fader_b(col) && row > 0 {
+                                state.overlay = Overlay::FlashFaderColorPicker {
+                                    page_idx: state.current_page,
+                                    col: state.main_fader_b as u8,
+                                };
+                                render_page(state, out);
+                                return;
+                            }
+                        }
+                    }
                     state.overlay = Overlay::ColorPicker {
                         page_idx: state.current_page,
                         note,
@@ -898,7 +1142,13 @@ fn handle_midi(message: &[u8], state: &mut BridgeState, out: &mut MidiOutputConn
             else if page.nudge_xy_mode    { handle_nudge_xy(note, state, out);     }
             else if page.xy_mode          { handle_xy(note, state, out);           }
             else if page.fader_mode       { handle_fader(note, state, out);        }
-            else if page.flash_fader_mode { handle_flash_fader(note, true, state, out); }
+            else if page.flash_fader_mode {
+                if let Some((_col, row)) = note_to_grid(note) {
+                    /* row 0 flash: Note On = release on Launchpad MK3 */
+                    handle_flash_fader(note, row != 0, state, out);
+                }
+            }
+            else if page.main_mode        { handle_main_grid(note, state, out);      }
             else if !page.custom_mode     { handle_button(note, state);            }
         }
 
@@ -917,15 +1167,27 @@ fn handle_midi(message: &[u8], state: &mut BridgeState, out: &mut MidiOutputConn
                 return;
             }
 
-            /* flash_fader: Note Off on bottom row sends 0.0 */
+            /* flash_fader: Note Off on bottom row = flash press on Launchpad MK3 */
             if page.flash_fader_mode {
-                if let Some((col, row)) = note_to_grid(note) {
+                if let Some((_col, row)) = note_to_grid(note) {
                     if row == 0 {
-                        /* flash button row: Note Off sends 0.0 */
-                        handle_flash_fader(note, false, state, out);
+                        handle_flash_fader(note, true, state, out);
                         return;
                     }
                 }
+            }
+
+            if page.main_mode {
+                if let Some((col, row)) = note_to_grid(note) {
+                    if main_is_flash_fader_b(col) && row == 0 {
+                        handle_main_flash_fader(note, true, state, out);
+                        return;
+                    }
+                    if main_is_button_cell(col, row) {
+                        handle_custom_button(note, state);
+                    }
+                }
+                return;
             }
 
             if page.custom_mode {
@@ -1072,46 +1334,275 @@ fn handle_xy(note: u8, state: &mut BridgeState, out: &mut MidiOutputConnection) 
     let page = state.config.pages[state.current_page].clone();
     if let Some(xy) = &page.xy_config {
         info!("XY col={} row={} pan={:.2} tilt={:.2}", col, row, pan, tilt);
-        state.nudge_pan.insert(1, pan);
-        state.nudge_tilt.insert(1, tilt);
         if let Err(e) = state.send_osc(&xy.pan_address.clone(), pan)   { error!("{}", e); }
         if let Err(e) = state.send_osc(&xy.tilt_address.clone(), tilt) { error!("{}", e); }
     }
     render_page(state, out);
 }
 
+fn nudge_xy_send_osc(
+    state: &BridgeState,
+    cfg: &NudgeXyConfig,
+    profile: usize,
+    pan: f32,
+    tilt: f32,
+) {
+    let num = cfg.pan_addresses.len().min(cfg.tilt_addresses.len());
+    if num == 0 { return; }
+
+    let targets: Vec<usize> = if profile == 0 {
+        (0..num).collect()
+    } else {
+        let fix = profile - 1;
+        if fix < num { vec![fix] } else { return; }
+    };
+
+    for i in targets {
+        if let Some(addr) = cfg.pan_addresses.get(i) {
+            if let Err(e) = state.send_osc(addr, pan) { error!("{}", e); }
+        }
+        if let Some(addr) = cfg.tilt_addresses.get(i) {
+            if let Err(e) = state.send_osc(addr, tilt) { error!("{}", e); }
+        }
+    }
+}
+
+fn handle_nudge_xy_profile(right_idx: usize, state: &mut BridgeState, out: &mut MidiOutputConnection) {
+    if right_idx <= 2 { return; } /* CC 39/29/19 unused */
+
+    let new_profile = 7 - right_idx;
+    if new_profile >= NUDGE_XY_NUM_PROFILES { return; }
+
+    let page_idx = state.current_page;
+    state.ensure_nudge_xy_state(page_idx);
+
+    let rs = state.nudge_xy_states.get_mut(&page_idx).unwrap();
+    if new_profile == rs.active_profile { return; }
+
+    if new_profile != 0 {
+        let master = rs.profiles[0];
+        rs.profiles[new_profile] = master;
+        info!(
+            "Nudge XY -> head {} (seeded pan={:.3} tilt={:.3})",
+            new_profile, master.pan, master.tilt
+        );
+    } else {
+        info!("Nudge XY -> master profile (display only, no OSC)");
+    }
+
+    rs.active_profile = new_profile;
+    state.save_nudge_xy();
+    render_page(state, out);
+}
+
 fn handle_nudge_xy(note: u8, state: &mut BridgeState, out: &mut MidiOutputConnection) {
     let (col, row) = match note_to_grid(note) { Some(v) => v, None => return };
     if let Some((pan_delta, tilt_delta)) = nudge_from_position(col, row, state) {
-        let page = state.config.pages[state.current_page].clone();
-        if let Some(xy) = &page.xy_config {
-            let page_idx = state.current_page;
+        let page_idx = state.current_page;
+        let page     = state.config.pages[page_idx].clone();
 
-            /* Get current pan/tilt values (default to 0.5) */
-            let current_pan = *state.nudge_pan.get(&1).unwrap_or(&0.5);
-            let current_tilt = *state.nudge_tilt.get(&1).unwrap_or(&0.5);
-
-            /* Add deltas and clamp to 0.0–1.0 */
-            let new_pan = (current_pan + pan_delta).max(0.0).min(1.0);
-            let new_tilt = (current_tilt + tilt_delta).max(0.0).min(1.0);
-
-            /* Store as new defaults */
-            state.nudge_pan.insert(1, new_pan);
-            state.nudge_tilt.insert(1, new_tilt);
+        if let Some(nxy) = &page.nudge_xy_config {
+            state.ensure_nudge_xy_state(page_idx);
+            let rs      = state.nudge_xy_states.get_mut(&page_idx).unwrap();
+            let prof    = rs.active_profile;
+            let current = rs.profiles[prof];
+            let new_pan  = (current.pan + pan_delta).clamp(0.0, 1.0);
+            let new_tilt = (current.tilt + tilt_delta).clamp(0.0, 1.0);
+            rs.profiles[prof].pan  = new_pan;
+            rs.profiles[prof].tilt = new_tilt;
 
             info!(
-                "Nudge: pan {} -> {:.3}, tilt {} -> {:.3}",
-                current_pan, new_pan, current_tilt, new_tilt
+                "Nudge XY profile={} pan {:.3}->{:.3} tilt {:.3}->{:.3}",
+                prof, current.pan, new_pan, current.tilt, new_tilt
             );
 
-            /* Send new values */
-            if let Err(e) = state.send_osc(&xy.pan_address.clone(), new_pan) {
-                error!("{}", e);
-            }
-            if let Err(e) = state.send_osc(&xy.tilt_address.clone(), new_tilt) {
-                error!("{}", e);
+            nudge_xy_send_osc(state, nxy, prof, new_pan, new_tilt);
+            state.save_nudge_xy();
+        } else if let Some(xy) = &page.xy_config {
+            /* Legacy single pan/tilt pair */
+            state.ensure_nudge_xy_state(page_idx);
+            let rs      = state.nudge_xy_states.get_mut(&page_idx).unwrap();
+            let current = rs.profiles[0];
+            let new_pan  = (current.pan + pan_delta).clamp(0.0, 1.0);
+            let new_tilt = (current.tilt + tilt_delta).clamp(0.0, 1.0);
+            rs.profiles[0].pan  = new_pan;
+            rs.profiles[0].tilt = new_tilt;
+
+            info!(
+                "Nudge: pan {:.3}->{:.3} tilt {:.3}->{:.3}",
+                current.pan, new_pan, current.tilt, new_tilt
+            );
+
+            if let Err(e) = state.send_osc(&xy.pan_address, new_pan)  { error!("{}", e); }
+            if let Err(e) = state.send_osc(&xy.tilt_address, new_tilt) { error!("{}", e); }
+            state.save_nudge_xy();
+        }
+    }
+}
+
+/*
+ * Switch fader-A profile: column height stays put, old OSC channel gets 0.0,
+ * new channel receives the current column brightness.
+ */
+fn main_switch_fader_a(
+    state: &mut BridgeState,
+    new_slot: usize,
+    out: &mut MidiOutputConnection,
+) {
+    let old_slot = state.main_fader_a;
+    if old_slot == new_slot {
+        return;
+    }
+
+    let page = state.config.pages[state.current_page].clone();
+    let fader = match &page.fader_config {
+        Some(f) => f.clone(),
+        None => return,
+    };
+
+    if let Some(addr) = fader.addresses.get(old_slot) {
+        info!("Main: fader A off slot {} -> {}", old_slot + 1, addr);
+        if let Err(e) = state.send_osc(addr, 0.0) {
+            error!("{}", e);
+        }
+    }
+
+    let level = state.main_level_a;
+    if let Some(addr) = fader.addresses.get(new_slot) {
+        let value = main_a_level_to_osc(level);
+        info!(
+            "Main: fader A slot {} -> {} = {:.2} (level {})",
+            new_slot + 1, addr, value, level
+        );
+        if let Err(e) = state.send_osc(addr, value) {
+            error!("{}", e);
+        }
+    }
+
+    state.main_fader_a = new_slot;
+}
+
+fn main_switch_fader_b(
+    state: &mut BridgeState,
+    new_slot: usize,
+    out: &mut MidiOutputConnection,
+) {
+    let old_slot = state.main_fader_b;
+    if old_slot == new_slot {
+        return;
+    }
+
+    let page = state.config.pages[state.current_page].clone();
+    
+    // Check for explicit flash addresses, otherwise fall back to the old array
+    let addresses = if !page.fader_config.as_ref().unwrap().flash_addresses.is_empty() {
+        page.fader_config.as_ref().unwrap().flash_addresses.clone()
+    } else {
+        info!("No flash addresses found, falling back to fader_config");
+        page.fader_config.as_ref().map(|f| f.addresses.clone()).unwrap_or_default()
+    };
+
+    if let Some(addr) = addresses.get(old_slot) {
+        info!("Main: fader B off slot {} -> {}", old_slot + 1, addr);
+        if let Err(e) = state.send_osc(addr, 0.0) {
+            error!("{}", e);
+        }
+    }
+
+    /* Column level (main_level_b) stays put; OSC only sent on flash press */
+    info!("Main: fader B -> slot {} (level {} retained)", new_slot + 1, state.main_level_b);
+    state.main_fader_b = new_slot;
+}
+
+fn handle_main_grid(note: u8, state: &mut BridgeState, out: &mut MidiOutputConnection) {
+    let (col, row) = match note_to_grid(note) { Some(v) => v, None => return };
+
+    if main_is_button_cell(col, row) {
+        return; /* OSC on Note Off */
+    }
+
+    let page_idx = state.current_page;
+    let page     = state.config.pages[page_idx].clone();
+
+    if let Some(slot) = main_selector_a_slot(col, row) {
+        main_switch_fader_a(state, slot, out);
+        render_page(state, out);
+        return;
+    }
+
+    if main_is_selector_b(col) {
+        let slot = row as usize;
+        main_switch_fader_b(state, slot, out);
+        render_page(state, out);
+        return;
+    }
+
+    if main_is_flash_fader_b(col) {
+        /* row 0 flash: Note On = release on Launchpad MK3 */
+        handle_main_flash_fader(note, row != 0, state, out);
+        return;
+    }
+
+    if main_is_fader_a(col, row) {
+        let slot      = state.main_fader_a;
+        let step      = row + 1;
+        let current   = state.main_level_a;
+        let new_level = if current == step { 0 } else { step };
+        state.main_level_a = new_level;
+        let value = main_a_level_to_osc(new_level);
+        if let Some(fader) = &page.fader_config {
+            if let Some(addr) = fader.addresses.get(slot) {
+                info!("Main fader A {} level={} -> {} = {:.2}", slot + 1, new_level, addr, value);
+                if let Err(e) = state.send_osc(addr, value) { error!("{}", e); }
             }
         }
+        render_page(state, out);
+    }
+}
+
+/*
+ * Main page col 7: flash fader for the col-6 selection.
+ * Row 0 = momentary flash; rows 1–7 = 7-step level (OSC only on flash press/release).
+ */
+fn handle_main_flash_fader(
+    note: u8,
+    pressed: bool,
+    state: &mut BridgeState,
+    out: &mut MidiOutputConnection,
+) {
+    let (col, row) = match note_to_grid(note) { Some(v) => v, None => return };
+    if !main_is_flash_fader_b(col) { return; }
+
+    let page = state.config.pages[state.current_page].clone();
+    let slot = state.main_fader_b;
+
+    // Direct Main B to flash_addresses if present, otherwise fall back to old behavior
+    let addresses = if !page.fader_config.as_ref().unwrap().flash_addresses.is_empty() {
+        page.fader_config.as_ref().unwrap().flash_addresses.clone()
+    } else {
+        info!("No flash addresses found, falling back to fader_config, {:?}", page.fader_config);
+        page.fader_config.as_ref().map(|f| f.addresses.clone()).unwrap_or_default()
+    };
+
+    if row == 0 {
+        state.flash_buttons_pressed[7] = pressed;
+        let osc_value = if pressed {
+            main_b_level_to_osc(state.main_level_b)
+        } else {
+            0.0
+        };
+        if let Some(addr) = addresses.get(slot) {
+            info!("Main flash B {} -> {} = {:.2}", if pressed { "ON" } else { "OFF" }, addr, osc_value);
+            if let Err(e) = state.send_osc(addr, osc_value) { error!("{}", e); }
+        }
+        render_page(state, out);
+    } else if pressed {
+        let fader_step = row;
+        let current    = state.main_level_b;
+        let new_level  = if current == fader_step { 0 } else { fader_step };
+        state.main_level_b = new_level;
+        info!("Main flash B level={} (awaiting flash, slot {})", new_level, slot + 1);
+        render_page(state, out);
     }
 }
 
@@ -1203,7 +1694,8 @@ fn main() -> Result<()> {
     let base        = std::path::Path::new(&config_path).parent()
                         .unwrap_or_else(|| std::path::Path::new("."));
     let colors_path = base.join("custom_colors.json").to_string_lossy().into_owned();
-    let rgbw_path   = base.join("rgbw_state.json").to_string_lossy().into_owned();
+    let rgbw_path     = base.join("rgbw_state.json").to_string_lossy().into_owned();
+    let nudge_xy_path = base.join("nudge_xy_state.json").to_string_lossy().into_owned();
 
     info!("Config: {} pages | OSC {}:{}", config.pages.len(), config.osc.host, config.osc.port);
 
@@ -1239,12 +1731,15 @@ fn main() -> Result<()> {
     midi_out_conn.send(&sysex_clear_all())?;
     std::thread::sleep(Duration::from_millis(20));
 
-    let mut state = BridgeState::new(config, colors_path, rgbw_path)?;
+    let mut state = BridgeState::new(config, colors_path, rgbw_path, nudge_xy_path)?;
 
-    /* pre-init RGBW state for all RGBW pages */
+    /* pre-init persisted page state */
     let rgbw_indices: Vec<usize> = state.config.pages.iter().enumerate()
         .filter(|(_, p)| p.rgbw_mode).map(|(i, _)| i).collect();
     for idx in rgbw_indices { state.ensure_rgbw_state(idx); }
+    let nudge_indices: Vec<usize> = state.config.pages.iter().enumerate()
+        .filter(|(_, p)| p.nudge_xy_mode).map(|(i, _)| i).collect();
+    for idx in nudge_indices { state.ensure_nudge_xy_state(idx); }
 
     let state = Arc::new(Mutex::new(state));
 
@@ -1268,7 +1763,7 @@ fn main() -> Result<()> {
     ).map_err(|e| anyhow::anyhow!("MIDI in: {}", e))?;
 
     info!("Bridge running. Ctrl+C to quit.");
-    info!("RGBW: master profile overrides all fixtures | fixture profiles start from master values");
+    info!("RGBW / Nudge XY: master profile -> all heads | fixture profiles seeded from master");
 
     loop { std::thread::sleep(Duration::from_secs(1)); }
 }

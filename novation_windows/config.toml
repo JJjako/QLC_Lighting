@@ -72,37 +72,49 @@ custom_mode = true    # ← enables long-press colour picker + full-grid OSC
   osc_address = "/qlc/function/100"
   osc_value = 1.0
 
-# ── PAGE 1: Disco / Effects ───────────────────────────────────────────────────
+# ── PAGE 1: Main dashboard ────────────────────────────────────────────────────
+# Layout (cols 0–7 left to right, row 0 = bottom):
+#
+#   [0][1] | [2][3] | [4] | [5] | [6] | [7]
+#   trig   | sel A  |fad A|trig | sel |flash
+#
+#   Cols 0–1           = colour-pickable triggers (CC 19 + tap to recolour)
+#   Cols 2–3           = pick 1 of 16 fader-A sources (col 2 = 1–8, col 3 = 9–16)
+#   Col 4              = live 8-step fader for fader-A selection (OSC immediate)
+#   Col 5 rows 0–5     = extra triggers
+#   Col 6              = pick fader 1–8 (row 0 bottom = fader 1) for col 7
+#   Col 7              = flash fader: row 0 = momentary flash, rows 1–7 = level
+#
+#   Fader-A uses all 16 OSC addresses below; fader-B picks from the first 8.
+#   A and B keep independent column heights; switching profile sends OFF to the
+#   old address (A also applies its column level to the new address).
+#   Unlisted trigger pads default to /lp/main/<note> on release.
 [[pages]]
-name = "Disco"
-selector_color = 21
+name = "Main"
+selector_color = 72
+main_mode = true
 
+  [pages.fader_config]
+  flash_addresses = [
+    "/qlc/ff1", "/qlc/ff2", "/qlc/ff3", "/qlc/ff4",
+    "/qlc/ff5", "/qlc/ff6", "/qlc/ff7", "/qlc/ff8"
+  ]
+  addresses = [
+    "/lp/f1",  "/lp/f2",  "/lp/f3",  "/lp/f4",
+    "/lp/f5",  "/lp/f6",  "/lp/f7",  "/lp/f8",
+    "/lp/f9",  "/lp/f10", "/lp/f11", "/lp/f12",
+    "/lp/f13", "/lp/f14", "/lp/f15", "/lp/f16",
+  ]
+  color_on  = 13
+  color_off = 0
+  
+
+  # Optional: pre-assign triggers in cols 0–1 and col 5 (note = grid position).
   [[pages.buttons]]
   note = 81
-  label = "Strobe Fast"
+  label = "Strobe"
   color = 72
   osc_address = "/qlc/function/1"
-  osc_value = 1.0
-
-  [[pages.buttons]]
-  note = 82
-  label = "Strobe Slow"
-  color = 72
-  osc_address = "/qlc/function/2"
-  osc_value = 1.0
-
-  [[pages.buttons]]
-  note = 83
-  label = "Color Chase"
-  color = 13
-  osc_address = "/qlc/function/3"
-  osc_value = 1.0
-
-  [[pages.buttons]]
-  note = 84
-  label = "Rainbow"
-  color = 53
-  osc_address = "/qlc/function/4"
   osc_value = 1.0
 
   [[pages.buttons]]
@@ -115,8 +127,15 @@ selector_color = 21
   [[pages.buttons]]
   note = 72
   label = "Full ON"
-  color = 72
+  color = 13
   osc_address = "/qlc/function/100"
+  osc_value = 1.0
+
+  [[pages.buttons]]
+  note = 16
+  label = "Scene A"
+  color = 45
+  osc_address = "/qlc/function/10"
   osc_value = 1.0
 
 # ── PAGE 2: Static Scenes ─────────────────────────────────────────────────────
@@ -208,6 +227,10 @@ fader_mode = true
     "/lp/f6",
     "/lp/f7",
     "/lp/f8",
+  ]
+  flash_addresses = [
+    "/qlc/ff1", "/qlc/ff2", "/qlc/ff3", "/qlc/ff4",
+    "/qlc/ff5", "/qlc/ff6", "/qlc/ff7", "/qlc/ff8"
   ]
   color_on  = 13
   color_off = 0
@@ -301,15 +324,38 @@ addresses = [
   "/lp/ff7",
   "/lp/ff8",
 ]
+  flash_addresses = [
+    "/qlc/ff1", "/qlc/ff2", "/qlc/ff3", "/qlc/ff4",
+    "/qlc/ff5", "/qlc/ff6", "/qlc/ff7", "/qlc/ff8"
+  ]
 color_on  = 72   # white for active fader steps and flash button
 color_off = 1    # very dim for inactive steps
+# ── Nudge XY (master + 4 heads) ───────────────────────────────────────────────
+# Right-side CCs (top → bottom): CC89=master, CC79=head1, CC69=head2,
+# CC59=head3, CC49=head4. CC39/29/19 unused.
+# Master nudges all heads; each head profile has its own pan/tilt OSC pair.
+# State saved to nudge_xy_state.json next to config.toml.
 [[pages]]
 name = "Nudge XY"
-selector_color = 79   # pink
+selector_color = 79
 nudge_xy_mode = true
 
-[pages.xy_config]
-pan_address  = "/lp/x1"
-tilt_address = "/lp/y1"
-color_inactive = 1     # dim red for center
-color_active   = 72    # white for fine nudges
+  [pages.nudge_xy_config]
+  pan_addresses = [
+    "/lp/x1",
+    "/lp/x2",
+    "/lp/x3",
+    "/lp/x4",
+  ]
+  tilt_addresses = [
+    "/lp/y1",
+    "/lp/y2",
+    "/lp/y3",
+    "/lp/y4",
+  ]
+
+  [pages.xy_config]
+  pan_address    = "/lp/x1"   # legacy fallback if nudge_xy_config omitted
+  tilt_address   = "/lp/y1"
+  color_inactive = 1
+  color_active   = 72
